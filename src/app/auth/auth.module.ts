@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthComponent } from './auth.component';
+import { MaterialModule } from '../material/material.module';
 import { AuthRoutingModule } from './auth.routing.module';
+import { LayoutComponent } from './pages/layout/layout.component';
+import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [];
 
 @NgModule({
-  imports: [AuthRoutingModule],
-  declarations:[AuthComponent]
+  imports: [AuthRoutingModule,MaterialModule],
+  declarations:[LoginComponent,LayoutComponent]
 })
 export class AuthModule { }
