@@ -6,13 +6,17 @@
         <div class="col-6">
             <img src="../../../../assets/church.jpg" class="img-fluid" alt="...">
             <h1 class="display-1">LOGIN</h1>
-            <form>
+            <form [formGroup]="authForm"> 
                 <mat-form-field  class="col-lg-12" appearance="fill">
                     <mat-label>Documento</mat-label>
                     <input 
                     type="text"
                     matInput 
-                    placeholder="Ingrese su numero de documento">
+                    placeholder="Ingrese su numero de documento"
+                    formControlName="document"
+                    >
+                    
+
                 </mat-form-field>
 
                 <mat-form-field  class="col-lg-12"  appearance="fill">
@@ -20,13 +24,18 @@
                     <input 
                         type="password"
                         matInput 
-                        placeholder="Ingrese su contraseña">
+                        placeholder="Ingrese su contraseña"
+                        formControlName="password"
+                        >
+                        
                 </mat-form-field>
             </form>
             <button
                 mat-button 
                 mat-flat-button 
                 color = "primary"
+                (click) = "login()"
+
             > <mat-icon>save</mat-icon> Ingresar</button>
         </div>
         <div class="col-3"></div>
