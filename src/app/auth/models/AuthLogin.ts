@@ -25,5 +25,6 @@ export interface AuthPostReqData{
     data:AuthPostReq
 }
 export interface AuthPostReq{
-
+    password:string,
+    document:string
 }
