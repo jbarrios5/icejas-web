@@ -7,6 +7,10 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)//para carga peresoza
   },
   {
+    path:'dashboard',
+    loadChildren: ()=> import('./dashboard/dashobard.module').then(m => m.DashboardModule)
+  },
+  {
     path:'**',
     redirectTo:'auth'
   }
