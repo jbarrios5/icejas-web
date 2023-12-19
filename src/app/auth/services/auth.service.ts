@@ -20,13 +20,7 @@ export class AuthService {
       }
     )
     return this.httpClient.post<AuthPostResData>(URL,request,{headers:header})
-    .pipe(
-      tap(res => console.log(res)),
-      catchError(err => {
-        console.log(err);
-        return of(undefined);
-        
-      })
-    )
+    
+    
   }
 }
