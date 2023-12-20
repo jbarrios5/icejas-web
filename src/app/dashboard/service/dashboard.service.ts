@@ -23,7 +23,7 @@ export class DashboardService {
   constructor(private httpClient:HttpClient) { }
 
   getChurch():Observable<Church>{
-    return this.httpClient.get<Church>(environments.icejasBaseUrl);
+    return this.httpClient.get<Church>(`${environments.icejasBaseUrl}/church?church_id=1`);
   }
   
     

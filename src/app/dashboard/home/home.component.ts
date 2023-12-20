@@ -36,9 +36,14 @@ export class HomeComponent implements OnInit{
 
   getChurch():void{
     this.dashboardService.getChurch().subscribe(
-      (res:Church) => this.church= res
+      (res:Church) => {
+        this.church= res
+        localStorage.setItem("church",JSON.stringify(this.church))
+      }
     )
   }
+
+  
   
   
 }
