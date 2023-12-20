@@ -1,3 +1,5 @@
+import { Church } from "./church.interface"
+
 export interface TransactionPostReqData {
     data:TransactionPostReq
 }
@@ -20,11 +22,5 @@ export interface TransactionType{
     id:number,
     description:string,
     category:string,
-    created:string
-}
-export interface Church{
-    id:number,
-    name:string,
-    currentBalance:number,
     created:string
 }

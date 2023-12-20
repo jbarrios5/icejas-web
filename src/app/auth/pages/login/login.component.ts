@@ -40,7 +40,6 @@ export class LoginComponent {
     
     this.authService.login(this.req)
     .subscribe( response =>{
-      debugger;
       if(!response){
         this.route.navigateByUrl("/auth")
         this.hasError = true;

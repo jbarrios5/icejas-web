@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { map } from 'rxjs/operators';
 import { User } from 'src/app/auth/models/AuthLogin';
+import { DashboardService } from '../service/dashboard.service';
+import { Church } from 'src/app/transactions/interface/church.interface';
 
 @Component({
   selector: 'app-home',
@@ -16,18 +16,28 @@ export class HomeComponent implements OnInit{
     name:'',
     role:''
   };
+  
+  church!:Church;
+
+  constructor(private dashboardService:DashboardService){}
   ngOnInit(): void {
     this.getUser();
+    this.getChurch();
+
   }
 
   
     
-  getUser():User{
-    debugger;
+  getUser():void{
     const user = localStorage.getItem('user') || '';
     let userStr:User = JSON.parse(user);
     this.user = userStr;
-    return this.user
+  }
+
+  getChurch():void{
+    this.dashboardService.getChurch().subscribe(
+      (res:Church) => this.church= res
+    )
   }
   
   

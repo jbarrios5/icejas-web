@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private httpClient:HttpClient) { }
 
   login(request:AuthPostReqData):Observable<AuthPostResData | undefined>{
-    const URL = `${environments.baseUrl}/login`;
+    const URL = `${environments.authBaseUrl}/login`;
     const header = new HttpHeaders(
       {
         'Content-Type': 'application/json',
