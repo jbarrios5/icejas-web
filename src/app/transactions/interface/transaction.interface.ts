@@ -24,3 +24,9 @@ export interface TransactionType{
     category:string,
     created:string
 }
+export interface TransactionTypePosResData{
+    data:TransactionTypePosRes
+}
+export interface TransactionTypePosRes{
+    transactionTypes:TransactionType[]
+}

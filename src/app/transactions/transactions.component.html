@@ -22,12 +22,11 @@
                         
                     </mat-form-field>
                       <br>
-                    <mat-form-field class="w-100">
+                    <mat-form-field class="w-100" *ngIf="types.length>0">
                         <mat-label>Tipo de actividad    </mat-label>
-                        <mat-select>
-                          <mat-option value="option">Gastos</mat-option>
-                          <mat-option value="option">Diezmo</mat-option>
-                          <mat-option value="option">Ofrenda</mat-option>
+                        <mat-select >
+                          <mat-option *ngFor="let item of types" value="item.id">{{item.description}}</mat-option>
+                          
                         </mat-select>
                         <mat-icon matSuffix>border_color</mat-icon>
                     </mat-form-field>
