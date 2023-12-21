@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Church } from './interface/church.interface';
 import { TransactionType, TransactionTypePosResData } from './interface/transaction.interface';
 import { TransactionService } from './service/transactions.service';
 
@@ -11,7 +13,15 @@ import { TransactionService } from './service/transactions.service';
 
 export class TransactionsComponent implements OnInit{
   types:TransactionType[]=[]
+  church!:Church;
   constructor(private transactionService:TransactionService){}
+
+  public transactionForm = new FormGroup({
+    amount: new FormControl('',{nonNullable:true}),
+    details: new FormControl('',{nonNullable:true}),
+    typeTransaction: new FormControl('',{nonNullable:true})
+  })
+
   ngOnInit(): void {
     this.getTransactionsType();  
   }
@@ -24,6 +34,17 @@ export class TransactionsComponent implements OnInit{
       
     }
     )
+  }
+
+  getChurch():void{
+    
+  }
+
+  addTransaction():void{
+    const {amount,details,typeTransaction}=this.transactionForm.value;
+
+    
+     
   }
 
 }

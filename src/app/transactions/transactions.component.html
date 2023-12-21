@@ -4,42 +4,52 @@
         <div class="col-lg-6 ">
             <mat-card>
                 <mat-card-content>
-                    <mat-card-header class="mb-3">
-                        <mat-card-title>Agregar Movimiento</mat-card-title>
-                        
-                    </mat-card-header>
+                    <form [formGroup]="transactionForm">
+                        <mat-card-header class="mb-3">
+                            <mat-card-title>Registrar Movimiento</mat-card-title>
 
-                    <mat-form-field appearance="fill" class="w-100">
-                        <mat-label>Monto</mat-label>
-                        <input matInput placeholder="Ingrese el monto del movimiento ">
-                        <mat-icon matSuffix>monetization_on</mat-icon>
-                    </mat-form-field>
-                      <br>
-                    <mat-form-field appearance="fill" class="w-100">
-                        <mat-label>Detalle</mat-label>
-                        <input matInput placeholder="Ingrese el detalle del movimiento">
-                        <mat-icon matSuffix>description</mat-icon>
-                        
-                    </mat-form-field>
-                      <br>
-                    <mat-form-field class="w-100" *ngIf="types.length>0">
-                        <mat-label>Tipo de actividad    </mat-label>
-                        <mat-select >
-                          <mat-option *ngFor="let item of types" value="item.id">{{item.description}}</mat-option>
-                          
-                        </mat-select>
-                        <mat-icon matSuffix>border_color</mat-icon>
-                    </mat-form-field>
-                   
-                      
-                     
-                     
-                      <button mat-button color="primary" class="w-100" mat-flat-button >Registrar</button>
+                        </mat-card-header>
+
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Monto</mat-label>
+                            <input 
+                                matInput 
+                                placeholder="Ingrese el monto del movimiento "
+                                formControlName="amount"
+                                >
+                            <mat-icon matSuffix>monetization_on</mat-icon>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Detalle</mat-label>
+                            <input 
+                                matInput 
+                                placeholder="Ingrese el detalle del movimiento"
+                                formControlName="details"
+                                >
+                            <mat-icon matSuffix>description</mat-icon>
+
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="w-100" *ngIf="types.length>0">
+                            <mat-label>Tipo de actividad </mat-label>
+                            <mat-select formControlName="typeTransaction">
+                                <mat-option *ngFor="let item of types" [value]="item.id">{{item.description}}</mat-option>
+
+                            </mat-select>
+                            <mat-icon matSuffix>border_color</mat-icon>
+                        </mat-form-field>
+
+
+
+
+                        <button mat-button color="primary" class="w-100" mat-flat-button (click)="addTransaction()" >Registrar</button>
+                    </form>
+
                 </mat-card-content>
             </mat-card>
         </div>
         <div class="col-lg-3"></div>
     </div>
-    
+
 </div>
-      

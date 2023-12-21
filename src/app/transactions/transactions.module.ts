@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TransactionsComponent } from './transactions.component';
 import { MaterialModule } from '../material/material.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransactionRouting } from './transaction-routing.module';
 
 
@@ -13,7 +13,9 @@ import { TransactionRouting } from './transaction-routing.module';
     CommonModule,
     MaterialModule,
     FormsModule,
-    TransactionRouting
+    TransactionRouting,
+    ReactiveFormsModule
+
   ]
 })
 export class TransactionsModule { }
