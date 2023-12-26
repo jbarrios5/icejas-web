@@ -1,24 +1,55 @@
 <div class="grid-container">
   <h1 class="mat-h1">{{'¡Hola '+ user.name+'!'}}</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
+  <mat-grid-list cols="2" rowHeight="50vh">
     <mat-grid-tile  [colspan]="2" [rowspan]="1">
       <mat-card class="dashboard-card " >
         
        
         <mat-card-content class="dashboard-card-content " >
           <div class="row d-flex align-items-center">
-            <div class="col-3">
-              <mat-card>
-                <mat-card-content>Simple card</mat-card-content>
+            <div class="col-lg-4 col-md-6 col-sm-12 mt-2">
+              <mat-card class="bg-success text-white">
+                <mat-card-content>
+                  <mat-card-header>
+                    <mat-card-title>Detalles</mat-card-title>
+                    
+                  </mat-card-header>
+                  <h2>
+                    <strong>Prueba</strong>
+                  </h2>
+
+                </mat-card-content>
+              </mat-card>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mt-2">
+              <mat-card class="bg-warning text-dark">
+                <mat-card-content>
+                  <mat-card-header>
+                    <mat-card-title>Cantidad de miembros</mat-card-title>
+                    
+                  </mat-card-header>
+                  <h2>
+                    <strong>70</strong>
+                  </h2>
+
+                </mat-card-content>
               </mat-card>
               
             </div>
-            <div class="col-3">
-              <mat-card>
-                <mat-card-content><mat-card-header>
-                  <mat-card-title>Saldos</mat-card-title>
-                  <mat-card-subtitle>Saldo actual de la iglesia</mat-card-subtitle>
-                </mat-card-header></mat-card-content>
+            <div class="col-lg-4 col-md-6 col-sm-12 mt-2">
+              <mat-card class="bg-primary text-white">
+                <mat-card-content>
+                  <mat-card-header>
+                    <mat-card-title>Saldo Actual</mat-card-title>
+                    
+                  </mat-card-header>
+                
+                  <h2>
+                    <strong>{{church.currentBalance | currency:'Gs':'symbol':'1.0-0' }}</strong>
+                  </h2>
+                    
+                
+              </mat-card-content>
               </mat-card>
             </div>
             

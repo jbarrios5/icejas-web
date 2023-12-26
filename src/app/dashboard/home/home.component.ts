@@ -17,7 +17,12 @@ export class HomeComponent implements OnInit{
     role:''
   };
   
-  church!:Church;
+  church:Church ={
+    currentBalance :0,
+    created:'',
+    id:0,
+    name:''
+  };
 
   constructor(private dashboardService:DashboardService){}
   ngOnInit(): void {

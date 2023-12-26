@@ -1,8 +1,9 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environments } from "src/app/environments/environments";
-import { TransactionTypePosResData } from "../interface/transaction.interface";
+import { Church } from "../interface/church.interface";
+import { Transaction, TransactionPostReqData, TransactionPostResData, TransactionType, TransactionTypePosResData } from "../interface/transaction.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -14,5 +15,17 @@ export class TransactionService{
         return this.httpClient.get<TransactionTypePosResData>(`${environments.icejasBaseUrl}/types`)
     }
 
+    addTransaction(transactionPostReqData:TransactionPostReqData):Observable<TransactionPostResData>{
+        const header = new HttpHeaders(
+            {
+              'Content-Type': 'application/json'
+           
+            }
+          )
+        return this.httpClient.post<TransactionPostResData>(`${environments.icejasBaseUrl}/`,transactionPostReqData,{headers:header})
+        
+        
+        
+    }
 
 }

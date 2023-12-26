@@ -14,7 +14,8 @@ export interface TransactionPostReq{
 export interface Transaction{
     id:number,
     amount:number,
-    details:string
+    details:string,
+    registerDate:string
 
 }
 
@@ -29,4 +30,13 @@ export interface TransactionTypePosResData{
 }
 export interface TransactionTypePosRes{
     transactionTypes:TransactionType[]
+}
+
+export interface TransactionPostResData{
+    data:TransactionPostRes
+}
+export interface TransactionPostRes{
+    transactionId:number,
+    message:string,
+    status:number
 }

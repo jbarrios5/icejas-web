@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { TransactionsComponent } from './transactions.component';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,6 +16,7 @@ import { TransactionRouting } from './transaction-routing.module';
     TransactionRouting,
     ReactiveFormsModule
 
-  ]
+  ],
+  providers: [DatePipe]
 })
 export class TransactionsModule { }

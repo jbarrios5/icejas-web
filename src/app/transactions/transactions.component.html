@@ -40,6 +40,13 @@
                             <mat-icon matSuffix>border_color</mat-icon>
                         </mat-form-field>
 
+                        <mat-form-field class="w-100">
+                            <mat-label>Seleccione la fecha del movimiento</mat-label>
+                            <input formControlName="transactionDate" matInput [matDatepicker]="picker">
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+
 
 
 
