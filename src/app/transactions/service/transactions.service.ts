@@ -2,8 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environments } from "src/app/environments/environments";
-import { Church } from "../interface/church.interface";
-import { Transaction, TransactionPostReqData, TransactionPostResData, TransactionType, TransactionTypePosResData } from "../interface/transaction.interface";
+import { Transaction, TransactionDetailGetResData, TransactionPostReqData, TransactionPostResData, TransactionType, TransactionTypePosResData } from "../interface/transaction.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -23,9 +22,10 @@ export class TransactionService{
             }
           )
         return this.httpClient.post<TransactionPostResData>(`${environments.icejasBaseUrl}/`,transactionPostReqData,{headers:header})
-        
-        
-        
+    }
+
+    getTransactionDetails(churchId:number):Observable<TransactionDetailGetResData>{
+      return this.httpClient.get<TransactionDetailGetResData>(`${environments.icejasBaseUrl}/?church_id=${churchId}`);
     }
 
 }

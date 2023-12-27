@@ -14,7 +14,7 @@ export class NavigationComponent {
 
   public sidebarItems = [
     { label:'Agregar movimiento', icon: 'add_circle',url:'/transaction/add' },
-    { label:'Listar movimientos', icon: 'list',url:'./transactions-list' },
+    { label:'Listar movimientos', icon: 'list',url:'/transaction/list' },
     { label:'Inicio', icon: 'home',url:'/dashboard/home' }
 
 

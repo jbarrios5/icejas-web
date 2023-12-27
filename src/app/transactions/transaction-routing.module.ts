@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { NavigationComponent } from "../dashboard/navigation/navigation.component";
+import { ListTransactionComponent } from "./pages/list-transaction/list-transaction.component";
 import { TransactionsComponent } from "./transactions.component";
 
 const routes: Routes = [
@@ -9,6 +10,7 @@ const routes: Routes = [
         component:NavigationComponent,
         children:[
             {path:'add',component:TransactionsComponent},
+            {path:'list',component:ListTransactionComponent},
             {path:'**',redirectTo:'home'},
         ]
 

@@ -4,11 +4,12 @@ import { TransactionsComponent } from './transactions.component';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransactionRouting } from './transaction-routing.module';
+import { ListTransactionComponent } from './pages/list-transaction/list-transaction.component';
 
 
 
 @NgModule({
-  declarations: [TransactionsComponent],
+  declarations: [TransactionsComponent, ListTransactionComponent],
   imports: [
     CommonModule,
     MaterialModule,

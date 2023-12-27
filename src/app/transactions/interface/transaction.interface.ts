@@ -40,3 +40,21 @@ export interface TransactionPostRes{
     message:string,
     status:number
 }
+
+export interface TransactionDetailGetResData{
+    data:TransactionDetailGetRes;
+}
+
+export interface TransactionDetailGetRes{
+    details:TransactionDetails []   
+
+}
+export interface TransactionDetails{
+    transactionId:number,
+    amount:number;
+    transactionTypeName:string;
+    transactionCategory:string;
+    currentBalance:number;
+    transactionDetail:string;
+    registeredDate:string;
+}
