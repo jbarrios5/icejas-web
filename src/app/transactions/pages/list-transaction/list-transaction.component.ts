@@ -24,17 +24,17 @@ export interface TransactionElement {
 })
 export class ListTransactionComponent implements OnInit{
   ELEMENT_DATA: TransactionElement[] = [
-    {date: '10/12/2023',type:'Ofrenda', details: 'Ofrenda', credit: 10000, debit: 0,balance:10000},
-    {date: '10/12/2023',type:'Ofrenda', details: 'Ofrenda', credit: 10000, debit: 0,balance:20000},
-    {date: '10/12/2023',type:'Gasto varios', details: 'Pago cuota terreo + agua + luz', credit: 0, debit: 10000,balance:10000},
+  
     
   ];
   displayedColumns: string[] = ['fecha', 'tipo','detalle', 'ingreso', 'egreso','saldo'];
-  dataSource = this.ELEMENT_DATA;
+  dataSource: TransactionElement [] = [];
 
   constructor(private transactionService:TransactionService){}
   ngOnInit(): void {
     this.getTranasctionDetails();
+    
+
   }
 
   getTranasctionDetails():void{
@@ -50,20 +50,27 @@ export class ListTransactionComponent implements OnInit{
       
       res.data.details.forEach( data => {
         let trElement :TransactionElement = {
-          balance:data.amount,
+          balance:data.currentBalance,
           date:data.registeredDate,
           details:data.transactionDetail,
-          type:data.transactionCategory,
+          type:data.transactionTypeName,
           credit: data.transactionCategory === 'C'? data.amount:0,
           debit:data.transactionCategory === 'D'? data.amount : 0,
         }
         this.ELEMENT_DATA.push(trElement);
         
       })
-      debugger;
-      this.dataSource = this.ELEMENT_DATA
+
+      this.addData()
     }
     ) 
+    console.log("Finish get transacionc");
+    
+    
+  }
 
+  addData():void{
+    console.log("Adding transaction");
+    this.dataSource = this.ELEMENT_DATA
   }
 }
