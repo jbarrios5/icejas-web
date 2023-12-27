@@ -4,6 +4,7 @@ import { TransactionService } from '../../service/transactions.service';
 import Swal from 'sweetalert2';
 export interface TransactionElement {
   date: string;
+  id:number;
   details: string;
   type:string;
   credit: number;
@@ -27,7 +28,7 @@ export class ListTransactionComponent implements OnInit{
   
     
   ];
-  displayedColumns: string[] = ['fecha', 'tipo','detalle', 'ingreso', 'egreso','saldo'];
+  displayedColumns: string[] = ['fecha','Nro', 'tipo','detalle', 'ingreso', 'egreso','saldo'];
   dataSource: TransactionElement [] = [];
 
   constructor(private transactionService:TransactionService){}
@@ -50,6 +51,7 @@ export class ListTransactionComponent implements OnInit{
       
       res.data.details.forEach( data => {
         let trElement :TransactionElement = {
+          id:data.transactionId,
           balance:data.currentBalance,
           date:data.registeredDate,
           details:data.transactionDetail,
