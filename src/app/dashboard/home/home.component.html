@@ -1,65 +1,17 @@
-<div class="grid-container">
+<div class="row mt-3 mx-5 mb-3 p-3">
   <h1 class="mat-h1">{{'¡Hola '+ user.name+'!'}}</h1>
-  <mat-grid-list cols="2" rowHeight="50vh">
-    <mat-grid-tile  [colspan]="2" [rowspan]="1">
-      <mat-card class="dashboard-card " >
-        
-       
-        <mat-card-content class="dashboard-card-content " >
-          <div class="row d-flex align-items-center">
-            <div class="col-lg-4 col-md-6 col-sm-12 mt-2">
-              <mat-card class="bg-success text-white">
-                <mat-card-content>
-                  <mat-card-header>
-                    <mat-card-title>Detalles</mat-card-title>
-                    
-                  </mat-card-header>
-                  <h2>
-                    <strong>Prueba</strong>
-                  </h2>
-
-                </mat-card-content>
-              </mat-card>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 mt-2">
-              <mat-card class="bg-warning text-dark">
-                <mat-card-content>
-                  <mat-card-header>
-                    <mat-card-title>Cantidad de miembros</mat-card-title>
-                    
-                  </mat-card-header>
-                  <h2>
-                    <strong>70</strong>
-                  </h2>
-
-                </mat-card-content>
-              </mat-card>
-              
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 mt-2">
-              <mat-card class="bg-primary text-white">
-                <mat-card-content>
-                  <mat-card-header>
-                    <mat-card-title>Saldo Actual</mat-card-title>
-                    
-                  </mat-card-header>
-                
-                  <h2>
-                    <strong>{{church.currentBalance | currency:'Gs':'symbol':'1.0-0' }}</strong>
-                  </h2>
-                    
-                
-              </mat-card-content>
-              </mat-card>
-            </div>
-            
-          </div>
-        </mat-card-content>
-        
-      </mat-card>
+  <div class="row bg-white shadow p-3 mb-5">
+    <div class="col-lg-3 col-md-6 col-sm-12 bg-primary text-white rounded mx-1">
+      <h2>Saldo actual</h2>
+      <p class="text-center"> <strong>{{church.currentBalance | currency:'Gs':'symbol':'1.0-0' }}</strong></p>
       
-    </mat-grid-tile>
-  
-  
-  </mat-grid-list>
+          
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12 bg-success  text-white rounded mx-1">
+          <h2 class="">Miembros</h2>
+          <p class="text-center"><strong>80</strong> </p>
+          
+      
+    </div>
+  </div>        
 </div>
