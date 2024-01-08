@@ -62,7 +62,28 @@ export class TransactionsComponent implements OnInit{
     this.user = JSON.parse(localStorage.getItem("user")||'')
   }
   addTransaction():void{
+    Swal.fire({
+      icon: 'warning',
+      title: '¿Estas seguro de agregar esta actividad?',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, estoy seguro',
+      cancelButtonText: 'Cancelar'
+     
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.processTransaction();
+      }else{
+        this.router.navigateByUrl("/dashboard/home")
+      }
+    })
+  }
+    
+    
+  processTransaction(): void {
     debugger;
+
     const {amount,details,typeTransaction,transactionDate}=this.transactionForm.value;
 
     this.transaction.amount = Number(amount) || 0;
@@ -84,23 +105,18 @@ export class TransactionsComponent implements OnInit{
           title: 'Movimiento agregado exitosamente!',
           timer: 2000,
           timerProgressBar: true,
-          showConfirmButton: false,
+          showConfirmButton: false
          
       })
       setTimeout(()=>{
         this.router.navigateByUrl("/dashboard/home")
       },3000)
-      
-      
       }else{
-      
           Swal.fire('Error', 'Error inesperado', 'error')
+          this.router.navigateByUrl("/dashboard/home")
       }  
-    }
-    )
-    
-    
-     
+    })
+  
   }
 
 

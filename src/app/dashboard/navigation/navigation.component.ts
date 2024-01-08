@@ -21,7 +21,8 @@ export class NavigationComponent {
   ]
   constructor(private router:Router){}
 
-  
+  toggle = []
+  items: string[] = [ "Item 1", "Item 2", "Item 3", "Item 4"];
   logout():void{
     localStorage.clear()
     this.router.navigateByUrl("/auth")
