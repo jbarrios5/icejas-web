@@ -19,8 +19,8 @@ export class GraphComponent implements OnInit{
     public barChartData: ChartConfiguration<'bar'>['data'] = {
       labels: [ 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre' ],
       datasets: [
-        { data: [ 1000000, 1500000, 1300000, 1100000, 1900000, 3000000, 1300000,1300000,1300000,1300000,1300000,1300000 ], label: 'Egreso' },
-        { data: [ 1000000, 2300000, 2000000, 2200000, 2500000, 2400000, 2900000,2900000,2900000,2900000,2900000,2800000 ], label: 'Ingreso' }
+        { data: [ 1000000, 1500000, 1300000, 1100000, 1900000, 3000000, 1300000,1300000,1300000,1300000,1300000,1300000 ], label: 'Egreso',backgroundColor: '#198754',borderColor: 'red' },
+        { data: [ 1000000, 2300000, 2000000, 2200000, 2500000, 2400000, 2900000,2900000,2900000,2900000,2900000,2800000 ], label: 'Ingreso' ,backgroundColor: '#0d6efd'}
       ]
     };
   
