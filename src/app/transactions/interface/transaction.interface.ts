@@ -50,11 +50,20 @@ export interface TransactionDetailGetRes{
 
 }
 export interface TransactionDetails{
-    transactionId:number,
+    transactionId:number;
     amount:number;
     transactionTypeName:string;
     transactionCategory:string;
     currentBalance:number;
     transactionDetail:string;
     registeredDate:string;
+}
+
+export interface TransactionReportGetResData{
+    data: TransactionReportGetRes []
+}
+export interface TransactionReportGetRes{
+    totalDebit:number;
+    totalCredit:number;
+    month:number
 }
