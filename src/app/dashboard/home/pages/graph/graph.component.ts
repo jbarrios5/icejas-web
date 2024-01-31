@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ChartConfiguration } from "chart.js";
+import { DashboardService } from "src/app/dashboard/service/dashboard.service";
+import { TransactionReportGetRes, TransactionReportGetResData } from "src/app/transactions/interface/transaction.interface";
 
 @Component({
     selector: 'graph-page',
@@ -7,20 +9,23 @@ import { ChartConfiguration } from "chart.js";
   })
 export class GraphComponent implements OnInit{
     
-    
+    constructor(private dashboardService:DashboardService) {
+    }
+
     ngOnInit(): void {
-        
+        this.getReport();
     }
     title = 'Movimientos';
-
+    totalsCredit:number[] = [ 0,0, 0, 0, 0, 0, 0,0,0,0,0,0 ];
+    totalsDebit:number[] = [ 0,0, 0, 0, 0, 0, 0,0,0,0,0,0 ];
     public barChartLegend = true;
     public barChartPlugins = [];
   
     public barChartData: ChartConfiguration<'bar'>['data'] = {
       labels: [ 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre' ],
       datasets: [
-        { data: [ 1000000, 1500000, 1300000, 1100000, 1900000, 3000000, 1300000,1300000,1300000,1300000,1300000,1300000 ], label: 'Egreso',backgroundColor: '#198754',borderColor: 'red' },
-        { data: [ 1000000, 2300000, 2000000, 2200000, 2500000, 2400000, 2900000,2900000,2900000,2900000,2900000,2800000 ], label: 'Ingreso' ,backgroundColor: '#0d6efd'}
+        { data:this.totalsDebit , label: 'Egreso',backgroundColor: '#198754',borderColor: 'red' },
+        { data: this.totalsCredit, label: 'Ingreso' ,backgroundColor: '#0d6efd'}
       ]
     };
   
@@ -38,10 +43,32 @@ export class GraphComponent implements OnInit{
             }
         }
     };
-  
-    constructor() {
+
+    getReport():void{
+
+        this.dashboardService.getReport().subscribe(
+            (res:TransactionReportGetResData) =>{
+                console.log(res);
+                
+                if(!res)
+                  return;
+                res.data.forEach( re => {
+                    this.totalsCredit[re.month-1] = re.totalCredit
+                    this.totalsDebit[re.month-1] = re.totalDebit
+                })
+                this.updateBarcharData()
+            }
+        )
     }
 
+    updateBarcharData():void{
+        this.barChartData.datasets = [
+            { data:this.totalsDebit , label: 'Egreso',backgroundColor: '#198754',borderColor: 'red' },
+            { data: this.totalsCredit, label: 'Ingreso' ,backgroundColor: '#0d6efd'}
+          ]
+    }
+  
+    
 
     
 }
