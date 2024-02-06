@@ -10,7 +10,7 @@ export class ServiceService {
   
 }
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Church } from 'src/app/transactions/interface/church.interface';
 import { environments } from 'src/app/environments/environments';
 import { TransactionReportGetResData } from 'src/app/transactions/interface/transaction.interface';
@@ -21,6 +21,9 @@ import { TransactionReportGetResData } from 'src/app/transactions/interface/tran
 })
 export class DashboardService {
 
+  public transactionReportGetResData!:TransactionReportGetResData
+
+
   constructor(private httpClient:HttpClient) { }
 
   getChurch():Observable<Church>{
@@ -28,7 +31,13 @@ export class DashboardService {
   }
   
   getReport():Observable<TransactionReportGetResData>{
-    return this.httpClient.get<TransactionReportGetResData>(`${environments.icejasBaseUrl}/report?churchId=1`);
+    return this.httpClient.get<TransactionReportGetResData>(`${environments.icejasBaseUrl}/report?churchId=1`)
+    .pipe(
+      tap( res =>{
+        if(res.data)
+            this.transactionReportGetResData = res;
+      })
+    );
   }
     
     

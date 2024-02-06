@@ -12,6 +12,7 @@ export class GraphComponent implements OnInit{
     constructor(private dashboardService:DashboardService) {
     }
 
+
     ngOnInit(): void {
         this.getReport();
     }
@@ -44,21 +45,14 @@ export class GraphComponent implements OnInit{
         }
     };
 
-    getReport():void{
-
-        this.dashboardService.getReport().subscribe(
-            (res:TransactionReportGetResData) =>{
-                console.log(res);
-                
-                if(!res)
-                  return;
-                res.data.forEach( re => {
-                    this.totalsCredit[re.month-1] = re.totalCredit
-                    this.totalsDebit[re.month-1] = re.totalDebit
-                })
-                this.updateBarcharData()
-            }
-        )
+    getReport(): void {
+        if (!this.dashboardService.transactionReportGetResData) 
+            return;
+        this.dashboardService.transactionReportGetResData.data.forEach(re => {
+            this.totalsCredit[re.month - 1] = re.totalCredit
+            this.totalsDebit[re.month - 1] = re.totalDebit
+        })
+        this.updateBarcharData()
     }
 
     updateBarcharData():void{

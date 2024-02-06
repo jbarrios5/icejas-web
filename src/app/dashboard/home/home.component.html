@@ -16,15 +16,18 @@
    
   
   </div>  
-  <div class="row ">
-    <div class="col-lg-2"></div>
-    <div class="col-lg-8 col-md-12 col-sm-12 ">
-
-      <graph-page/>  
-
-    </div>
-
+  <div *ngIf="!this.finishedGetReport; else result;">
+      
+  </div>
+  <ng-template   #result>
+    <div class="row ">
       <div class="col-lg-2"></div>
-
-  </div>    
+      <div class="col-lg-8">
+        <graph-page  />  
+      </div>
+      <div class="col-lg-2"></div>
+    </div>
+  </ng-template>
+  
+  
 </div>

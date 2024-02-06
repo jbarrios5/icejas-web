@@ -23,11 +23,13 @@ export class HomeComponent implements OnInit{
     id:0,
     name:''
   };
-
+  public finishedGetReport:boolean = false;
   constructor(private dashboardService:DashboardService){}
   ngOnInit(): void {
+    this.getReport();
     this.getUser();
     this.getChurch();
+    
 
   }
 
@@ -48,7 +50,20 @@ export class HomeComponent implements OnInit{
     )
   }
 
-  
+  getReport():void{
+    console.log("antes de obtener reportes",this.finishedGetReport);
+    
+    this.dashboardService.getReport().subscribe
+    (
+      (res)=>{
+        if(!res)
+          this.finishedGetReport =false
+        else
+          this.finishedGetReport = true;  
+          console.log("despuesde obtener reportes",this.finishedGetReport);
+      }
+    )
+  }
   
   
 }
