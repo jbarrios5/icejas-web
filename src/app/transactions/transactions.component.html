@@ -24,11 +24,12 @@
                         <br>
                         <mat-form-field appearance="fill" class="w-100">
                             <mat-label>Detalle</mat-label>
-                            <input 
-                                matInput 
-                                placeholder="Ingrese el detalle del movimiento"
+                            <mat-select 
                                 formControlName="details"
                                 >
+                                    
+                                <mat-option *ngFor="let item of types" [value]="item.id">{{item.description}}</mat-option>
+                            </mat-select>        
                             <mat-icon matSuffix>description</mat-icon>
 
                         </mat-form-field>
@@ -36,7 +37,7 @@
                         <mat-form-field class="w-100" *ngIf="types.length>0">
                             <mat-label>Tipo de actividad </mat-label>
                             <mat-select formControlName="typeTransaction">
-                                <mat-option *ngFor="let item of types" [value]="item.id">{{item.description}}</mat-option>
+                                <mat-option *ngFor="let item of types" [value]="item.id">{{item.category=='D'?'Gasto':'Ingreso'}}</mat-option>
 
                             </mat-select>
                             <mat-icon matSuffix>border_color</mat-icon>

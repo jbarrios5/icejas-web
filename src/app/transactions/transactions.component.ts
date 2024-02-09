@@ -7,6 +7,7 @@ import { Transaction, TransactionPostReq, TransactionPostReqData, TransactionPos
 import { TransactionService } from './service/transactions.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 
 
@@ -37,12 +38,15 @@ export class TransactionsComponent implements OnInit{
     typeTransaction: new FormControl('',{nonNullable:true}),
     transactionDate: new FormControl('',{nonNullable:true})
   })
+ 
 
   ngOnInit(): void {
     this.getTransactionsType();  
     this.getChurch();
     this.getUser();
+    
   }
+ 
 
   getTransactionsType():void{
     this.transactionService.getTransactionTypes()
@@ -87,7 +91,6 @@ export class TransactionsComponent implements OnInit{
     const {amount,details,typeTransaction,transactionDate}=this.transactionForm.value;
 
     this.transaction.amount = Number(amount) || 0;
-    this.transaction.details = details || '';
     this.transaction.registerDate = transactionDate!;
 
     this.transactionType  = this.types.find(t => t.id === Number(typeTransaction))!;

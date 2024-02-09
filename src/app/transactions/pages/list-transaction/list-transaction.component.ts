@@ -24,10 +24,7 @@ export interface TransactionElement {
   styleUrls: ['./list-transaction.component.css']
 })
 export class ListTransactionComponent implements OnInit{
-  ELEMENT_DATA: TransactionElement[] = [
-  
-    
-  ];
+  ELEMENT_DATA: TransactionElement[] = [];
   displayedColumns: string[] = ['fecha','Nro', 'tipo','detalle', 'ingreso', 'egreso','saldo'];
   dataSource: TransactionElement [] = [];
 
@@ -51,13 +48,13 @@ export class ListTransactionComponent implements OnInit{
       
       res.data.details.forEach( data => {
         let trElement :TransactionElement = {
-          id:data.transactionId,
-          balance:data.currentBalance,
-          date:data.registeredDate,
-          details:data.transactionDetail,
-          type:data.transactionTypeName,
+          id: data.transactionId,
+          balance: data.currentBalance,
+          date: data.registeredDate,
+          details: data.transactionTypeName,
+          type: data.transactionCategory === 'C'?'Ingreso':'Gasto',
           credit: data.transactionCategory === 'C'? data.amount:0,
-          debit:data.transactionCategory === 'D'? data.amount : 0,
+          debit: data.transactionCategory === 'D'? data.amount : 0,
         }
         this.ELEMENT_DATA.push(trElement);
         
@@ -66,13 +63,11 @@ export class ListTransactionComponent implements OnInit{
       this.addData()
     }
     ) 
-    console.log("Finish get transacionc");
     
     
   }
 
   addData():void{
-    console.log("Adding transaction");
     this.dataSource = this.ELEMENT_DATA
   }
 }
