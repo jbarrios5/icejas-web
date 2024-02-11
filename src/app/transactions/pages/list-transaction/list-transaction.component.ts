@@ -25,7 +25,7 @@ export interface TransactionElement {
 })
 export class ListTransactionComponent implements OnInit{
   ELEMENT_DATA: TransactionElement[] = [];
-  displayedColumns: string[] = ['fecha','Nro', 'tipo','detalle', 'ingreso', 'egreso','saldo'];
+  displayedColumns: string[] = ['fecha','Nro', 'actividad','observacion', 'ingreso', 'egreso','saldo'];
   dataSource: TransactionElement [] = [];
 
   constructor(private transactionService:TransactionService){}
@@ -49,8 +49,8 @@ export class ListTransactionComponent implements OnInit{
           id: data.transactionId,
           balance: data.currentBalance,
           date: data.registeredDate,
-          details: data.transactionCategory,
-          type: data.transactionCategory === 'C'?'Ingreso':'Gasto',
+          details: data.transactionDetail,
+          type: data.transactionTypeName,
           credit: data.transactionCategory === 'C'? data.amount:0,
           debit: data.transactionCategory === 'D'? data.amount : 0,
         }
