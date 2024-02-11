@@ -26,20 +26,27 @@
                             <mat-label>Detalle</mat-label>
                             <mat-select 
                                 formControlName="details"
+                                (selectionChange)="setTypeTransaction()"
+                                
                                 >
                                     
-                                <mat-option *ngFor="let item of types" [value]="item.id">{{item.description}}</mat-option>
+                                <mat-option  *ngFor="let item of types" [value]="item.id">{{item.description}}</mat-option>
                             </mat-select>        
                             <mat-icon matSuffix>description</mat-icon>
 
                         </mat-form-field>
                         <br>
-                        <mat-form-field class="w-100" *ngIf="types.length>0">
+                        <mat-form-field class="w-100 " >
                             <mat-label>Tipo de actividad </mat-label>
-                            <mat-select formControlName="typeTransaction">
-                                <mat-option *ngFor="let item of types" [value]="item.id">{{item.category=='D'?'Gasto':'Ingreso'}}</mat-option>
+                            <input  formControlName="typeTransaction" matInput [readOnly]="editable">
 
-                            </mat-select>
+                            <mat-icon matSuffix>border_color</mat-icon>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="w-100 " >
+                            <mat-label>Observacion </mat-label>
+                            <input  formControlName="observation" matInput [readOnly]="editable">
+
                             <mat-icon matSuffix>border_color</mat-icon>
                         </mat-form-field>
 

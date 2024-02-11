@@ -31,8 +31,6 @@ export class ListTransactionComponent implements OnInit{
   constructor(private transactionService:TransactionService){}
   ngOnInit(): void {
     this.getTranasctionDetails();
-    
-
   }
 
   getTranasctionDetails():void{
@@ -51,7 +49,7 @@ export class ListTransactionComponent implements OnInit{
           id: data.transactionId,
           balance: data.currentBalance,
           date: data.registeredDate,
-          details: data.transactionTypeName,
+          details: data.transactionCategory,
           type: data.transactionCategory === 'C'?'Ingreso':'Gasto',
           credit: data.transactionCategory === 'C'? data.amount:0,
           debit: data.transactionCategory === 'D'? data.amount : 0,
@@ -69,5 +67,13 @@ export class ListTransactionComponent implements OnInit{
 
   addData():void{
     this.dataSource = this.ELEMENT_DATA
+    
+  }
+  filter(event: Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    console.log(filterValue);
+   
+    
+    
   }
 }

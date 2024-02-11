@@ -29,12 +29,14 @@ export class TransactionsComponent implements OnInit{
   transactionPostReqData: TransactionPostReqData = {} as TransactionPostReqData;
   transactionPostReq:  TransactionPostReq = {} as TransactionPostReq;
   transactionType!:TransactionType ;
+  public editable:boolean = false;
 
   constructor(private transactionService:TransactionService,private router:Router){}
 
   public transactionForm = new FormGroup({
     amount: new FormControl('',{nonNullable:true}),
     details: new FormControl('',{nonNullable:true}),
+    observation: new FormControl('',{nonNullable:true}),
     typeTransaction: new FormControl('',{nonNullable:true}),
     transactionDate: new FormControl('',{nonNullable:true})
   })
@@ -44,6 +46,7 @@ export class TransactionsComponent implements OnInit{
     this.getTransactionsType();  
     this.getChurch();
     this.getUser();
+    this.transactionForm.get('typeTransaction')?.disable(); 
     
   }
  
@@ -88,12 +91,13 @@ export class TransactionsComponent implements OnInit{
   processTransaction(): void {
     debugger;
 
-    const {amount,details,typeTransaction,transactionDate}=this.transactionForm.value;
+    const {amount,details,typeTransaction,transactionDate,observation}=this.transactionForm.value;
 
     this.transaction.amount = Number(amount) || 0;
+    this.transaction.details = observation|| ''
     this.transaction.registerDate = transactionDate!;
-
-    this.transactionType  = this.types.find(t => t.id === Number(typeTransaction))!;
+debugger
+    this.transactionType  = this.types.find(t => t.id === Number(details))!;
     
     this.transactionPostReq.church = this.church
     this.transactionPostReq.transaction = this.transaction;
@@ -120,6 +124,17 @@ export class TransactionsComponent implements OnInit{
       }  
     })
   
+  }
+  setTypeTransaction():void{
+    const {amount,details,typeTransaction,transactionDate}=this.transactionForm.value;
+    console.log(details);
+    const category= this.types.find(x => (x.id === Number(details)))
+    console.log(category);
+    
+    this.transactionForm.controls['typeTransaction'].setValue(category?.category === 'D'?'Gasto':'Ingreso')
+    
+    
+    
   }
 
 
