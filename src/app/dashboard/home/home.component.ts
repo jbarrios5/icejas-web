@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit{
     id:0,
     name:''
   };
+  public totalDebitMonth:number = 0;
+  public totalCreditMonth:number = 0;
   public finishedGetReport:boolean = false;
   constructor(private dashboardService:DashboardService){}
   ngOnInit(): void {
@@ -56,10 +58,15 @@ export class HomeComponent implements OnInit{
     this.dashboardService.getReport().subscribe
     (
       (res)=>{
+        console.log(res);
+        
         if(!res)
           this.finishedGetReport =false
-        else
+        else{
           this.finishedGetReport = true;  
+          this.totalCreditMonth = res.data.at(-1)!.totalCredit ;
+          this.totalDebitMonth = res.data.at(-1)!.totalDebit ;
+        }
           console.log("despuesde obtener reportes",this.finishedGetReport);
       }
     )

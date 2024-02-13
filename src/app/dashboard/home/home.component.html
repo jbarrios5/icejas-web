@@ -2,16 +2,20 @@
   <h1 class="mat-h1">{{'¡Hola '+ user.name+'!'}}</h1>
   
   <div class="row bg-white shadow p-3 mb-5">
-    <div class="col-lg-4 col-md-4 col-sm-12 bg-primary mt-2 text-white rounded mx-1">
+    <div class="col-lg-4 col-md-4 col-sm-12 bg-primary mt-2 text-white rounded ">
       <h2>Saldo actual</h2>
       <p class="text-center size"> <strong>{{church.currentBalance | currency:'Gs':'symbol':'1.0-0' }}</strong></p>
       
           
     </div>
-    <div class="col-lg-4 col-md-4 col-sm-12 bg-success mt-2 text-white rounded mx-1">
-          <h2 class="">Miembros</h2>
-          <p class="text-center size"><strong>80</strong> </p>
+    <div class="col-lg-4 col-md-4 col-sm-12 bg-success mt-2 text-white rounded ">
+          <h2 class="">Ingreso mes actual</h2>
+          <p class="text-center size"><strong>{{totalCreditMonth | currency:'Gs':'symbol':'1.0-0' }}</strong> </p>
     </div>
+    <div class="col-lg-4 col-md-4 col-sm-12 bg-secondary text-white mt-2  rounded ">
+      <h2 class="">Gasto mes actual</h2>
+      <p class="text-center size"><strong>{{totalDebitMonth | currency:'Gs':'symbol':'1.0-0' }}</strong> </p>
+</div>
 
    
   
@@ -21,11 +25,11 @@
   </div>
   <ng-template   #result> 
     <div class="row ">
-      <div class="col-lg-2"></div>
-      <div class="col-lg-8">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-10">
         <graph-page  />  
       </div>
-      <div class="col-lg-2"></div>
+      <div class="col-lg-1"></div>
     </div>
    </ng-template> 
   
