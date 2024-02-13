@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Church } from '../../interface/church.interface';
 import { TransactionService } from '../../service/transactions.service';
 import Swal from 'sweetalert2';
 import { formatDate } from '@angular/common';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TransactionType, TransactionTypePosResData } from '../../interface/transaction.interface';
+import { MatPaginator } from '@angular/material/paginator';
 export interface TransactionElement {
   date: string;
   id: number;
@@ -30,6 +31,7 @@ export class ListTransactionComponent implements OnInit {
   displayedColumns: string[] = ['fecha', 'Nro', 'actividad', 'observacion', 'ingreso', 'egreso', 'saldo'];
   dataSource: TransactionElement[] = [];
   types: TransactionType[] = [];
+  @ViewChild(MatPaginator) paginator!: MatPaginator ;
 
   public transactionListForm = new FormGroup({
     transactionActivite: new FormControl('', { nonNullable: true }),

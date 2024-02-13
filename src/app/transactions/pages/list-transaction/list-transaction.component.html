@@ -1,12 +1,15 @@
 <div class="container">
   <div class="row mt-3">
-    <h1>Lista de Movimientos</h1>
+    <mat-divider></mat-divider>
+    <h1 class="mt-2">Lista de Movimientos</h1>
+    <mat-divider></mat-divider>
   </div>
+  
   <div class="row mt-3 mb-3">
     <!--Aca est la parte del filtrado!-->
     <form [formGroup]="transactionListForm" class="container ">
       <mat-form-field class="col-lg-3 col-md-12 col-sm-12 mx-1">
-        <mat-label>Enter a date range</mat-label>
+        <mat-label>Ingrese en rango de fecha</mat-label>
         <mat-date-range-input [rangePicker]="picker">
           <input matStartDate placeholder="Start date" formControlName="transactionDateStart">
           <input matEndDate placeholder="End date" formControlName="transactionDateEnd">
@@ -91,7 +94,15 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
+      <mat-paginator 
+                 [length]="40"
+                 [pageSize]="10"
+                 aria-label="Select page of periodic elements"
+                 
+                 >
+  </mat-paginator>
     </ng-template>
+    
   </div>
 
 
