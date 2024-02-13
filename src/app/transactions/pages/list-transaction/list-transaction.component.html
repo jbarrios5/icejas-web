@@ -19,8 +19,7 @@
         <mat-label>Actividad</mat-label>
         <mat-select formControlName="transactionActivite">
 
-          <mat-option>prueba</mat-option>
-          <mat-option>prueba2</mat-option>
+          <mat-option  *ngFor="let item of types" [value]="item.id">{{item.description}}</mat-option>
         </mat-select>
         <mat-icon matSuffix>description</mat-icon>
 
