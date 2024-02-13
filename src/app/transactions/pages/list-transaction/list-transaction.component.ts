@@ -24,7 +24,8 @@ export interface TransactionElement {
 })
 export class ListTransactionComponent implements OnInit {
 
-  
+  public debit:string = "D";
+  public credit:string = "C";
   ELEMENT_DATA: TransactionElement[] = [];
   displayedColumns: string[] = ['fecha', 'Nro', 'actividad', 'observacion', 'ingreso', 'egreso', 'saldo'];
   dataSource: TransactionElement[] = [];
@@ -85,7 +86,7 @@ export class ListTransactionComponent implements OnInit {
     const { transactionDateStart, transactionDateEnd, transactionActivite, transactionType } = this.transactionListForm.value;
     let startDate = '';
     let endDate = ''
-
+debugger;
     if(transactionDateStart) 
       startDate= formatDate(transactionDateStart,'yyyy-MM-dd', 'en-US')
     if(transactionDateEnd) 

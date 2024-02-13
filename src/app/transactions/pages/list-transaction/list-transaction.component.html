@@ -28,8 +28,8 @@
         <mat-label>Ingreso o Egreso</mat-label>
         <mat-select formControlName="transactionType">
 
-          <mat-option>Ingreso</mat-option>
-          <mat-option>Egreso</mat-option>
+          <mat-option [value]="this.credit">Ingreso</mat-option>
+          <mat-option [value]="this.debit">Egreso</mat-option>
         </mat-select>
         <mat-icon matSuffix>credit_card</mat-icon>
 
