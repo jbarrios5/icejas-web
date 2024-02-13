@@ -29,15 +29,12 @@ export class TransactionService {
     return this.httpClient.post<TransactionPostResData>(`${environments.icejasBaseUrl}/`, transactionPostReqData, { headers: header })
   }
 
-  getTransactionDetails(churchId: number, dateStart: string, dateEnd: string, activiteType: string, transactionType: string): Observable<TransactionDetailGetResData> {
-    let params = new HttpParams()
-      .set('churchId', churchId.toString())
-      .set('startDate', dateStart)
-      .set('endDate', dateEnd)
-      .set('activiteType', activiteType)
-      .set('transactionType', transactionType);
+  getTransactionDetails(churchId: number, dateStart: string|null, dateEnd: string|null, activiteType: string, transactionType: string): Observable<TransactionDetailGetResData> {
+   
+      debugger;
+
     return this.httpClient.get<TransactionDetailGetResData>(
-      `${environments.icejasBaseUrl}/`, { params: params });
+      `${environments.icejasBaseUrl}/?churchId=${churchId}&activiteType=${activiteType}&transactionType=${transactionType}`);
   }
 
 }

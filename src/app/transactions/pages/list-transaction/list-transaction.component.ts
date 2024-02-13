@@ -41,13 +41,13 @@ export class ListTransactionComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getTranasctionDetails('','','','');
+    this.getTranasctionDetails(null,null,'','');
     this.getTypes();
   }
 
-  getTranasctionDetails( dateStart:string='', dateEnd:string='',activiteType:string='',transactionType:string=''): void {
-    
+  getTranasctionDetails( dateStart:string|null, dateEnd:string|null,activiteType:string='',transactionType:string=''): void {
     let church: Church = JSON.parse(localStorage.getItem("church")!)
+    debugger;
     this.transactionService.getTransactionDetails(church.id,dateStart,dateEnd,activiteType,transactionType)
       .subscribe(res => {
 
@@ -82,8 +82,8 @@ export class ListTransactionComponent implements OnInit {
   }
   filter(): void {
     const { transactionDateStart, transactionDateEnd, transactionActivite, transactionType } = this.transactionListForm.value;
-    
-    this.getTranasctionDetails(transactionDateStart,transactionDateEnd,transactionActivite,transactionType);
+    this.ELEMENT_DATA = []
+    this.getTranasctionDetails(transactionDateStart || null,transactionDateEnd ||null,transactionActivite,transactionType);
     
     console.log(transactionDateStart, transactionDateEnd);
   }
