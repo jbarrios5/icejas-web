@@ -42,11 +42,11 @@ export class ListTransactionComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getTranasctionDetails(null,null,'','');
+    this.getTranasctionDetails('','','','');
     this.getTypes();
   }
 
-  getTranasctionDetails( dateStart:string|null, dateEnd:string|null,activiteType:string='',transactionType:string=''): void {
+  getTranasctionDetails( dateStart:string='', dateEnd:string='',activiteType:string='',transactionType:string=''): void {
     let church: Church = JSON.parse(localStorage.getItem("church")!)
     this.ELEMENT_DATA = []
     this.transactionService.getTransactionDetails(church.id,dateStart,dateEnd,activiteType,transactionType)
@@ -83,13 +83,13 @@ export class ListTransactionComponent implements OnInit {
   }
   filter(): void {
     const { transactionDateStart, transactionDateEnd, transactionActivite, transactionType } = this.transactionListForm.value;
-    let startDate = null;
-    let endDate = null
+    let startDate = '';
+    let endDate = ''
 
     if(transactionDateStart) 
-      startDate= formatDate(transactionDateStart,'yyyy-dd-MM', 'en-US')
+      startDate= formatDate(transactionDateStart,'yyyy-MM-dd', 'en-US')
     if(transactionDateEnd) 
-      endDate = formatDate(transactionDateEnd,'yyyy-dd-MM', 'en-US')
+      endDate = formatDate(transactionDateEnd,'yyyy-MM-dd', 'en-US')
     debugger;
     this.getTranasctionDetails(startDate ,endDate ,transactionActivite,transactionType);
     
@@ -112,6 +112,7 @@ export class ListTransactionComponent implements OnInit {
   }
 
   clearTable():void{
-    this.getTranasctionDetails(null,null,'','');
+    this.getTranasctionDetails('','','','');
+    this.transactionListForm.reset();
   }
 }

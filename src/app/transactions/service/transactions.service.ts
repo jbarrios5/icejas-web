@@ -30,11 +30,11 @@ export class TransactionService {
   }
 
   getTransactionDetails(churchId: number, dateStart: string|null, dateEnd: string|null, activiteType: string, transactionType: string): Observable<TransactionDetailGetResData> {
-   
+      
       debugger;
 
     return this.httpClient.get<TransactionDetailGetResData>(
-      `${environments.icejasBaseUrl}/?churchId=${churchId}&activiteType=${activiteType}&transactionType=${transactionType}`);
+      `${environments.icejasBaseUrl}/?churchId=${churchId}&startDate=${dateStart}&endDate=${dateEnd}&activiteType=${activiteType}&transactionType=${transactionType}`);
   }
 
 }
