@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Church } from '../../interface/church.interface';
 import { TransactionService } from '../../service/transactions.service';
 import Swal from 'sweetalert2';
+import { FormControl, FormGroup } from '@angular/forms';
 export interface TransactionElement {
   date: string;
   id:number;
@@ -27,8 +28,18 @@ export class ListTransactionComponent implements OnInit{
   ELEMENT_DATA: TransactionElement[] = [];
   displayedColumns: string[] = ['fecha','Nro', 'actividad','observacion', 'ingreso', 'egreso','saldo'];
   dataSource: TransactionElement [] = [];
+  
+  public transactionListForm = new FormGroup({
+    transactionActivite: new FormControl('',{nonNullable:true}),
+    transactionType: new FormControl('',{nonNullable:true}),
+    transactionDateStart: new FormControl('',{nonNullable:true}),
+    transactionDateEnd: new FormControl('',{nonNullable:true})
+  })
+
 
   constructor(private transactionService:TransactionService){}
+
+
   ngOnInit(): void {
     this.getTranasctionDetails();
   }
@@ -69,11 +80,8 @@ export class ListTransactionComponent implements OnInit{
     this.dataSource = this.ELEMENT_DATA
     
   }
-  filter(event: Event){
-    const filterValue = (event.target as HTMLInputElement).value;
-    console.log(filterValue);
-   
-    
-    
+  filter():void{
+    const {transactionDateStart,transactionDateEnd,transactionActivite,transactionType} = this.transactionListForm.value;
+    console.log(transactionDateStart,transactionDateEnd);
   }
 }

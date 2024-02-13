@@ -94,9 +94,8 @@ export class TransactionsComponent implements OnInit{
     const {amount,details,typeTransaction,transactionDate,observation}=this.transactionForm.value;
 
     this.transaction.amount = Number(amount) || 0;
-    this.transaction.details = observation|| ''
+    this.transaction.details = observation || 'Sin observacion'
     this.transaction.registerDate = transactionDate!;
-debugger
     this.transactionType  = this.types.find(t => t.id === Number(details))!;
     
     this.transactionPostReq.church = this.church

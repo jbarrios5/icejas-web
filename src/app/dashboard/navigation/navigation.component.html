@@ -1,40 +1,52 @@
-<mat-sidenav-container  fullscreen >
-  <mat-sidenav  class="sidenav" #sidenav mode="push" 
-      >
+<mat-sidenav-container fullscreen>
+  <mat-sidenav class="sidenav" #sidenav mode="push">
     <mat-toolbar>
       <span>Menu</span>
       <span class="example-spacer"></span>
       <button mat-icon-button (click)="sidenav.toggle()">
-          <mat-icon>menu</mat-icon>
+        <mat-icon>menu</mat-icon>
       </button>
 
-  </mat-toolbar>
-    <mat-nav-list >
-    <mat-list-item  *ngFor="let item of sidebarItems"
-    [routerLink] = "item.url" 
-    (click)="sidenav.toggle()"
-    >
-    <mat-icon>{{item.icon }} </mat-icon>{{ item.label}} </mat-list-item>
-    
-      
+    </mat-toolbar>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title class="h6 text-title text-center">
+          Movimientos
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <mat-list-item *ngFor="let item of sidebarItems" [routerLink]="item.url" (click)="sidenav.toggle()">
+          <mat-icon>{{item.icon }} </mat-icon>{{ item.label}}
+        </mat-list-item>
+
+
+      </mat-nav-list>
+    </mat-expansion-panel>
+
+    <mat-nav-list>
+      <mat-list-item  [routerLink]="home.url" (click)="sidenav.toggle()">
+        <mat-icon>{{home.icon }} </mat-icon>{{ home.label}}
+      </mat-list-item>
+
+
     </mat-nav-list>
-  
 
   </mat-sidenav>
 
-  
-  
-    <mat-toolbar color="primary">
-      <button mat-icon-button (click)="sidenav.toggle()">
-        <mat-icon>menu</mat-icon>
+
+
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
 
     </button>
-      <span>icejas</span>
-      <span class="example-spacer"></span>
-      <button mat-button  (click)="logout()">
-        Salir
-    </button >
-    </mat-toolbar>
-    <router-outlet></router-outlet>
-  
+    <span>icejas</span>
+    <span class="example-spacer"></span>
+    <button mat-button (click)="logout()">
+      Salir
+    </button>
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+
 </mat-sidenav-container>

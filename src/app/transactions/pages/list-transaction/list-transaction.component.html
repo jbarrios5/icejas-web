@@ -1,65 +1,97 @@
 <div class="container">
-    <div class="row mt-3"> 
-        <h1>Lista de Movimientos</h1>
-    </div>
-    <div class="row mt-3 mb-3">
-        <mat-form-field>
-            <mat-label>Filtrar</mat-label>
-            <input matInput  (keyup)="filter($event)" placeholder="Filtar por" #input>
-          </mat-form-field>
-        <div *ngIf="this.dataSource.length == 0;else data">No se encontraron datos en la tabla!</div>
-        
-        <ng-template #data>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 col-lg-12 col-md-12 col-sm-12">
+  <div class="row mt-3">
+    <h1>Lista de Movimientos</h1>
+  </div>
+  <div class="row mt-3 mb-3">
+    <!--Aca est la parte del filtrado!-->
+    <form [formGroup]="transactionListForm" class="container p-3">
+      <mat-form-field class="col-lg-3 col-md-6 col-sm-6 mx-1">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate placeholder="Start date" formControlName="transactionDateStart">
+          <input matEndDate placeholder="End date" formControlName="transactionDateEnd">
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+      <mat-form-field  class="col-lg-3 col-md-6 col-sm-6 mx-1">
+        <mat-label>Actividad</mat-label>
+        <mat-select formControlName="transactionActivite">
 
-            <!--- Note that these columns can be defined in any order.
-                  The actual rendered columns are set as a property on the row definition" -->
-          
-            <!-- Position Column -->
-            <ng-container matColumnDef="fecha">
-              <th mat-header-cell *matHeaderCellDef> Fecha </th>
-              <td mat-cell *matCellDef="let element"> {{element.date}} </td>
-            </ng-container>
-            <ng-container matColumnDef="Nro">
-              <th mat-header-cell *matHeaderCellDef> Nro movimiento </th>
-              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-            </ng-container>
+          <mat-option>prueba</mat-option>
+          <mat-option>prueba2</mat-option>
+        </mat-select>
+        <mat-icon matSuffix>description</mat-icon>
 
-            <ng-container matColumnDef="actividad">
-                <th mat-header-cell *matHeaderCellDef> Actividad </th>
-                <td mat-cell *matCellDef="let element"> {{element.type}} </td>
-              </ng-container>
-          
-            <!-- Name Column -->
-            <ng-container matColumnDef="observacion">
-              <th mat-header-cell *matHeaderCellDef> Observacion </th>
-              <td mat-cell *matCellDef="let element"> {{element.details}} </td>
-            </ng-container>
-          
-            <!-- Weight Column -->
-            <ng-container matColumnDef="ingreso">
-              <th mat-header-cell *matHeaderCellDef> Ingreso </th>
-              <td mat-cell *matCellDef="let element"> {{element.credit | currency:'Gs ':'symbol':'1.0-0' }} </td>
-            </ng-container>
-          
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="egreso">
-              <th mat-header-cell *matHeaderCellDef> Egreso </th>
-              <td mat-cell *matCellDef="let element"> {{element.debit | currency:'Gs ':'symbol':'1.0-0' }} </td>
-            </ng-container>
+      </mat-form-field>
 
-            <ng-container matColumnDef="saldo">
-                <th mat-header-cell *matHeaderCellDef> Saldo </th>
-                <td mat-cell *matCellDef="let element"> {{element.balance | currency:'Gs ':'symbol':'1.0-0' }} </td>
-              </ng-container>
-          
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-        </ng-template> 
-    </div>
-    
+      <mat-form-field  class="col-lg-3 col-md-6 col-sm-6 mx-1">
+        <mat-label>Ingreso o Egreso</mat-label>
+        <mat-select formControlName="transactionType">
+
+          <mat-option>Ingreso</mat-option>
+          <mat-option>Egreso</mat-option>
+        </mat-select>
+        <mat-icon matSuffix>description</mat-icon>
+
+      </mat-form-field>
       
+      <button mat-button color="primary" class="col-lg-2 col-md-6 col-sm-6 mx-1 text-center " mat-flat-button  (click)="filter()">Filtrar</button>
+    </form>
+
+    <div *ngIf="this.dataSource.length == 0;else data">No se encontraron datos en la tabla!</div>
+
+    <ng-template #data>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 col-lg-12 col-md-12 col-sm-12">
+
+        <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef> Fecha </th>
+          <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Nro">
+          <th mat-header-cell *matHeaderCellDef> Nro movimiento </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actividad">
+          <th mat-header-cell *matHeaderCellDef> Actividad </th>
+          <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="observacion">
+          <th mat-header-cell *matHeaderCellDef> Observacion </th>
+          <td mat-cell *matCellDef="let element"> {{element.details}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="ingreso">
+          <th mat-header-cell *matHeaderCellDef> Ingreso </th>
+          <td mat-cell *matCellDef="let element"> {{element.credit | currency:'Gs ':'symbol':'1.0-0' }} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="egreso">
+          <th mat-header-cell *matHeaderCellDef> Egreso </th>
+          <td mat-cell *matCellDef="let element"> {{element.debit | currency:'Gs ':'symbol':'1.0-0' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="saldo">
+          <th mat-header-cell *matHeaderCellDef> Saldo </th>
+          <td mat-cell *matCellDef="let element"> {{element.balance | currency:'Gs ':'symbol':'1.0-0' }} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </ng-template>
+  </div>
+
+
 
 </div>
-

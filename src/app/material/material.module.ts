@@ -19,11 +19,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatDatepickerModule} from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   exports: [
     MatAutocompleteModule,
     MatButtonModule,
+    MatExpansionModule,
     MatCardModule,
     MatChipsModule,
     MatDialogModule,

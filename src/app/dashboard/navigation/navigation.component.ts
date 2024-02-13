@@ -13,12 +13,14 @@ export class NavigationComponent {
   private breakpointObserver = inject(BreakpointObserver);
 
   public sidebarItems = [
-    { label:'Agregar movimiento', icon: 'add_circle',url:'/transaction/add' },
-    { label:'Listar movimientos', icon: 'list',url:'/transaction/list' },
-    { label:'Inicio', icon: 'home',url:'/dashboard/home' }
+    { label:'Agregar ', icon: 'add_circle',url:'/transaction/add' },
+    { label:'Listar ', icon: 'list',url:'/transaction/list' },
+    
 
 
   ]
+  public home = { label:'Inicio', icon: 'home',url:'/dashboard/home' }
+  
   constructor(private router:Router){}
 
   toggle = []
