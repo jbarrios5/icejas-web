@@ -11,7 +11,6 @@
           <input matStartDate placeholder="Start date" formControlName="transactionDateStart">
           <input matEndDate placeholder="End date" formControlName="transactionDateEnd">
         </mat-date-range-input>
-        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
       </mat-form-field>
@@ -32,14 +31,14 @@
           <mat-option>Ingreso</mat-option>
           <mat-option>Egreso</mat-option>
         </mat-select>
-        <mat-icon matSuffix>description</mat-icon>
+        <mat-icon matSuffix>credit_card</mat-icon>
 
       </mat-form-field>
       
       <button mat-button color="primary" class="col-lg-2 col-md-6 col-sm-6 mx-1 text-center " mat-flat-button  (click)="filter()">Filtrar</button>
     </form>
 
-    <div *ngIf="this.dataSource.length == 0;else data">No se encontraron datos en la tabla!</div>
+    <div *ngIf="this.dataSource.length == 0;else data"><h2 class="text-center">No se encontraron datos en la tabla!!!</h2> </div>
 
     <ng-template #data>
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 col-lg-12 col-md-12 col-sm-12">

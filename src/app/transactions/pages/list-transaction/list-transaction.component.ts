@@ -16,16 +16,14 @@ export interface TransactionElement {
 
 }
 
-
-
-
-
 @Component({
   selector: 'app-list-transaction',
   templateUrl: './list-transaction.component.html',
   styleUrls: ['./list-transaction.component.css']
 })
 export class ListTransactionComponent implements OnInit {
+
+  
   ELEMENT_DATA: TransactionElement[] = [];
   displayedColumns: string[] = ['fecha', 'Nro', 'actividad', 'observacion', 'ingreso', 'egreso', 'saldo'];
   dataSource: TransactionElement[] = [];
@@ -43,21 +41,20 @@ export class ListTransactionComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getTranasctionDetails();
+    this.getTranasctionDetails('','','','');
     this.getTypes();
   }
 
-  getTranasctionDetails(): void {
+  getTranasctionDetails( dateStart:string='', dateEnd:string='',activiteType:string='',transactionType:string=''): void {
+    
     let church: Church = JSON.parse(localStorage.getItem("church")!)
-    this.transactionService.getTransactionDetails(church.id)
+    this.transactionService.getTransactionDetails(church.id,dateStart,dateEnd,activiteType,transactionType)
       .subscribe(res => {
 
         if (!res) {
           Swal.fire('Error', 'Error inesperado', 'error')
           return
         }
-        console.log(res);
-
         res.data.details.forEach(data => {
           let trElement: TransactionElement = {
             id: data.transactionId,
@@ -85,6 +82,9 @@ export class ListTransactionComponent implements OnInit {
   }
   filter(): void {
     const { transactionDateStart, transactionDateEnd, transactionActivite, transactionType } = this.transactionListForm.value;
+    
+    this.getTranasctionDetails(transactionDateStart,transactionDateEnd,transactionActivite,transactionType);
+    
     console.log(transactionDateStart, transactionDateEnd);
   }
 
