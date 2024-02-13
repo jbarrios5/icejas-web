@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Church } from '../../interface/church.interface';
 import { TransactionService } from '../../service/transactions.service';
 import Swal from 'sweetalert2';
+import { formatDate } from '@angular/common';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TransactionType, TransactionTypePosResData } from '../../interface/transaction.interface';
 export interface TransactionElement {
@@ -47,7 +48,7 @@ export class ListTransactionComponent implements OnInit {
 
   getTranasctionDetails( dateStart:string|null, dateEnd:string|null,activiteType:string='',transactionType:string=''): void {
     let church: Church = JSON.parse(localStorage.getItem("church")!)
-    debugger;
+    this.ELEMENT_DATA = []
     this.transactionService.getTransactionDetails(church.id,dateStart,dateEnd,activiteType,transactionType)
       .subscribe(res => {
 
@@ -82,8 +83,15 @@ export class ListTransactionComponent implements OnInit {
   }
   filter(): void {
     const { transactionDateStart, transactionDateEnd, transactionActivite, transactionType } = this.transactionListForm.value;
-    this.ELEMENT_DATA = []
-    this.getTranasctionDetails(transactionDateStart || null,transactionDateEnd ||null,transactionActivite,transactionType);
+    let startDate = null;
+    let endDate = null
+
+    if(transactionDateStart) 
+      startDate= formatDate(transactionDateStart,'yyyy-dd-MM', 'en-US')
+    if(transactionDateEnd) 
+      endDate = formatDate(transactionDateEnd,'yyyy-dd-MM', 'en-US')
+    debugger;
+    this.getTranasctionDetails(startDate ,endDate ,transactionActivite,transactionType);
     
     console.log(transactionDateStart, transactionDateEnd);
   }
@@ -101,5 +109,9 @@ export class ListTransactionComponent implements OnInit {
       this.types = this.transactionService.transactionTypes;
     }
 
+  }
+
+  clearTable():void{
+    this.getTranasctionDetails(null,null,'','');
   }
 }
