@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Church } from '../../interface/church.interface';
 import { TransactionService } from '../../service/transactions.service';
 import Swal from 'sweetalert2';
@@ -6,6 +6,8 @@ import { formatDate } from '@angular/common';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TransactionType, TransactionTypePosResData } from '../../interface/transaction.interface';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { debounce } from 'rxjs';
 export interface TransactionElement {
   date: string;
   id: number;
@@ -23,13 +25,13 @@ export interface TransactionElement {
   templateUrl: './list-transaction.component.html',
   styleUrls: ['./list-transaction.component.css']
 })
-export class ListTransactionComponent implements OnInit {
+export class ListTransactionComponent implements OnInit,AfterViewInit {
 
   public debit:string = "D";
   public credit:string = "C";
-  ELEMENT_DATA: TransactionElement[] = [];
+  public ELEMENT_DATA: TransactionElement[] = [];
   displayedColumns: string[] = ['fecha', 'Nro', 'actividad', 'observacion', 'ingreso', 'egreso', 'saldo'];
-  dataSource: TransactionElement[] = [];
+  dataSource = new MatTableDataSource<TransactionElement>()
   types: TransactionType[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator ;
 
@@ -42,6 +44,10 @@ export class ListTransactionComponent implements OnInit {
 
 
   constructor(private transactionService: TransactionService) { }
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator
+    
+  }
 
 
   ngOnInit(): void {
@@ -81,7 +87,9 @@ export class ListTransactionComponent implements OnInit {
   }
 
   addData(): void {
-    this.dataSource = this.ELEMENT_DATA
+    console.log(this.ELEMENT_DATA.length);
+  debugger;  
+    this.dataSource.data = this.ELEMENT_DATA
 
   }
   filter(): void {

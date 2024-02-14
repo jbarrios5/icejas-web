@@ -26,7 +26,6 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
   exports: [
     MatAutocompleteModule,
     MatButtonModule,
-    
     MatPaginatorModule,
     MatExpansionModule,
     MatCardModule,
