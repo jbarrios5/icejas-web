@@ -5,9 +5,9 @@ import Swal from 'sweetalert2';
 import { formatDate } from '@angular/common';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TransactionType, TransactionTypePosResData } from '../../interface/transaction.interface';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { debounce } from 'rxjs';
+import { throwDialogContentAlreadyAttachedError } from '@angular/cdk/dialog';
 export interface TransactionElement {
   date: string;
   id: number;
@@ -25,16 +25,16 @@ export interface TransactionElement {
   templateUrl: './list-transaction.component.html',
   styleUrls: ['./list-transaction.component.css']
 })
-export class ListTransactionComponent implements OnInit,AfterViewInit {
+export class ListTransactionComponent implements OnInit{
 
   public debit:string = "D";
   public credit:string = "C";
   public ELEMENT_DATA: TransactionElement[] = [];
   displayedColumns: string[] = ['fecha', 'Nro', 'actividad', 'observacion', 'ingreso', 'egreso', 'saldo'];
-  dataSource = new MatTableDataSource<TransactionElement>()
+  dataSource =new MatTableDataSource<TransactionElement>(this.ELEMENT_DATA)
   types: TransactionType[] = [];
-  @ViewChild(MatPaginator) paginator!: MatPaginator ;
 
+ 
   public transactionListForm = new FormGroup({
     transactionActivite: new FormControl('', { nonNullable: true }),
     transactionType: new FormControl('', { nonNullable: true }),
@@ -43,11 +43,10 @@ export class ListTransactionComponent implements OnInit,AfterViewInit {
   })
 
 
-  constructor(private transactionService: TransactionService) { }
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator
+  constructor(private transactionService: TransactionService) { 
     
   }
+ 
 
 
   ngOnInit(): void {
@@ -87,9 +86,7 @@ export class ListTransactionComponent implements OnInit,AfterViewInit {
   }
 
   addData(): void {
-    console.log(this.ELEMENT_DATA.length);
-  debugger;  
-    this.dataSource.data = this.ELEMENT_DATA
+    this.dataSource = new MatTableDataSource<TransactionElement>(this.ELEMENT_DATA.slice(0,5))
 
   }
   filter(): void {
@@ -121,7 +118,17 @@ debugger;
     }
 
   }
+  changeView(event:PageEvent):void{
+    const startIndex = event.pageIndex * event.pageSize;
+    let endIndex = startIndex + event.pageSize
+    if(endIndex > this.ELEMENT_DATA.length){
+      endIndex = this.ELEMENT_DATA.length
 
+    }
+    this.dataSource.data = this.ELEMENT_DATA.slice(startIndex,endIndex)
+    console.log('change');
+    
+  }
   clearTable():void{
     this.getTranasctionDetails('','','','');
     this.transactionListForm.reset();
