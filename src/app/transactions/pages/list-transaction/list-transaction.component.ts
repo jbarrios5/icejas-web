@@ -33,6 +33,7 @@ export class ListTransactionComponent implements OnInit{
   displayedColumns: string[] = ['fecha', 'Nro', 'actividad', 'observacion', 'ingreso', 'egreso', 'saldo'];
   dataSource =new MatTableDataSource<TransactionElement>(this.ELEMENT_DATA)
   types: TransactionType[] = [];
+  @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
 
  
   public transactionListForm = new FormGroup({
@@ -86,7 +87,8 @@ export class ListTransactionComponent implements OnInit{
   }
 
   addData(): void {
-    this.dataSource = new MatTableDataSource<TransactionElement>(this.ELEMENT_DATA.slice(0,5))
+    this.dataSource = new MatTableDataSource<TransactionElement>(this.ELEMENT_DATA.slice(0,10))
+    this.dataSource.paginator = this.paginator
 
   }
   filter(): void {
@@ -126,6 +128,7 @@ debugger;
 
     }
     this.dataSource.data = this.ELEMENT_DATA.slice(startIndex,endIndex)
+    
     console.log('change');
     
   }

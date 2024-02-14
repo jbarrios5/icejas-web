@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container p-3">
   <div class="row mt-3">
     <mat-divider></mat-divider>
     <h1 class="mt-2">Lista de Movimientos</h1>
@@ -54,50 +54,51 @@
                   The actual rendered columns are set as a property on the row definition" -->
 
         <!-- Position Column -->
-        <ng-container matColumnDef="fecha">
-          <th mat-header-cell *matHeaderCellDef> Fecha </th>
-          <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        <ng-container matColumnDef="fecha" class="font-col">
+          <th mat-header-cell *matHeaderCellDef class="font-col">  Fecha </th>
+          <td mat-cell *matCellDef="let element" class="font-col" > {{element.date}} </td>
         </ng-container>
         <ng-container matColumnDef="Nro">
-          <th mat-header-cell *matHeaderCellDef> Nro movimiento </th>
-          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          <th mat-header-cell *matHeaderCellDef class="font-col"> Nro movimiento </th>
+          <td mat-cell *matCellDef="let element" class="font-col"> {{element.id}} </td>
         </ng-container>
 
         <ng-container matColumnDef="actividad">
-          <th mat-header-cell *matHeaderCellDef> Actividad </th>
-          <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+          <th mat-header-cell *matHeaderCellDef class="font-col"> Actividad </th>
+          <td mat-cell *matCellDef="let element" class="font-col"> {{element.type}} </td>
         </ng-container>
 
         <!-- Observation Column -->
         <ng-container matColumnDef="observacion">
-          <th mat-header-cell *matHeaderCellDef> Observacion </th>
-          <td mat-cell *matCellDef="let element"> {{element.details}} </td>
+          <th mat-header-cell *matHeaderCellDef class="font-col"> Observacion </th>
+          <td mat-cell *matCellDef="let element" class="font-col"> {{element.details}} </td>
         </ng-container>
 
         <!-- Credit Column -->
         <ng-container matColumnDef="ingreso">
-          <th mat-header-cell *matHeaderCellDef> Ingreso </th>
-          <td mat-cell *matCellDef="let element"> {{element.credit | currency:'Gs ':'symbol':'1.0-0' }} </td>
+          <th mat-header-cell *matHeaderCellDef class="font-col"> Ingreso </th>
+          <td mat-cell *matCellDef="let element" class="font-col"> {{element.credit | currency:'Gs ':'symbol':'1.0-0' }} </td>
         </ng-container>
 
         <!-- Debit Column -->
         <ng-container matColumnDef="egreso">
-          <th mat-header-cell *matHeaderCellDef> Egreso </th>
-          <td mat-cell *matCellDef="let element"> {{element.debit | currency:'Gs ':'symbol':'1.0-0' }} </td>
+          <th mat-header-cell *matHeaderCellDef class="font-col"> Egreso </th>
+          <td mat-cell *matCellDef="let element" class="font-col"> {{element.debit | currency:'Gs ':'symbol':'1.0-0' }} </td>
         </ng-container>
 
         <ng-container matColumnDef="saldo">
-          <th mat-header-cell *matHeaderCellDef> Saldo </th>
-          <td mat-cell *matCellDef="let element"> {{element.balance | currency:'Gs ':'symbol':'1.0-0' }} </td>
+          <th mat-header-cell *matHeaderCellDef class="font-col"> Saldo </th>
+          <td mat-cell *matCellDef="let element" class="font-col"> {{element.balance | currency:'Gs ':'symbol':'1.0-0' }} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
       <mat-paginator 
-                 [length]="this.dataSource.data.length"
-                 [pageSizeOptions]="[5,10,25]"
+                 [length]="this.ELEMENT_DATA.length"
+                 [pageSizeOptions]="[10,20,30]"
                  aria-label="Select page of periodic elements"
+                 showFirstLastButtons
                  (page)="changeView($event)"
                  
                  >
