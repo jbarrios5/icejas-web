@@ -55,12 +55,13 @@ export class ListTransactionComponent implements OnInit{
     this.getTypes();
   }
 
-  openDialog():void{
+  openDialog(nro:number):void{
+    console.log(nro);
     
 
     const dialogRef = this.dialog.open(DialogComponent,{
       width:'50%',
-      data: this.types.at(-1)
+      data: this.ELEMENT_DATA.find( x => x.id = nro)
     })
     dialogRef.afterClosed().subscribe(result => {
       
