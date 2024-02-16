@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Church } from '../../interface/church.interface';
 import { TransactionService } from '../../service/transactions.service';
 import Swal from 'sweetalert2';
@@ -7,7 +7,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { TransactionType, TransactionTypePosResData } from '../../interface/transaction.interface';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { throwDialogContentAlreadyAttachedError } from '@angular/cdk/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogComponent } from 'src/app/dialog/dialog.component';
 export interface TransactionElement {
   date: string;
   id: number;
@@ -30,7 +31,7 @@ export class ListTransactionComponent implements OnInit{
   public debit:string = "D";
   public credit:string = "C";
   public ELEMENT_DATA: TransactionElement[] = [];
-  displayedColumns: string[] = ['fecha', 'Nro', 'actividad', 'observacion', 'ingreso', 'egreso', 'saldo'];
+  displayedColumns: string[] = ['fecha', 'Nro', 'actividad', 'observacion', 'ingreso', 'egreso', 'saldo','acciones'];
   dataSource =new MatTableDataSource<TransactionElement>(this.ELEMENT_DATA)
   types: TransactionType[] = [];
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
@@ -44,15 +45,27 @@ export class ListTransactionComponent implements OnInit{
   })
 
 
-  constructor(private transactionService: TransactionService) { 
+  constructor(private transactionService: TransactionService, public dialog:MatDialog
+    ) { 
     
   }
  
-
-
   ngOnInit(): void {
     this.getTranasctionDetails('','','','');
     this.getTypes();
+  }
+
+  openDialog():void{
+    
+
+    const dialogRef = this.dialog.open(DialogComponent,{
+      width:'50%',
+      data: this.types.at(-1)
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      
+      console.log('The dialog was closed');
+    });
   }
 
   getTranasctionDetails( dateStart:string='', dateEnd:string='',activiteType:string='',transactionType:string=''): void {

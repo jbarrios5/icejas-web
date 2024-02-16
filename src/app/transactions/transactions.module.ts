@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransactionRouting } from './transaction-routing.module';
 import { ListTransactionComponent } from './pages/list-transaction/list-transaction.component';
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { DialogComponent } from '../dialog/dialog.component';
+import { DialogModule } from '../dialog/dialog.module';
 export const MY_DATE_FORMATS = {
   parse: {
     dateInput: 'DD-MM-YYYY',
@@ -25,7 +27,8 @@ export const MY_DATE_FORMATS = {
     MaterialModule,
     FormsModule,
     TransactionRouting,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DialogModule
 
   ],
   providers: [DatePipe,

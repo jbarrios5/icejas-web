@@ -21,10 +21,13 @@ import {MatDatepickerModule} from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatExpansionModule} from '@angular/material/expansion';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 @NgModule({
   exports: [
     MatAutocompleteModule,
+    MatTooltipModule,
     MatButtonModule,
     MatPaginatorModule,
     MatExpansionModule,

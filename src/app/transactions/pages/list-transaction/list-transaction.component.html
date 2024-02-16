@@ -42,67 +42,80 @@
         <mat-icon>search</mat-icon>Filtrar</button>
           
       <button mat-button color="warn" class=" mx-1 col-lg-2 col-md-12 col-sm-12  text-center " mat-flat-button  (click)="clearTable()">
-        <mat-icon>delete_forever</mat-icon> Limpiar </button>
+        <mat-icon>cleaning_services </mat-icon> Limpiar </button>
     </form>
 
     <div *ngIf="this.ELEMENT_DATA.length == 0;else data"><h2 class="text-center">No se encontraron datos en la tabla!!!</h2> </div>
 
     <ng-template #data>
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 col-lg-12 col-md-12 col-sm-12 font-col">
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" class=" col-lg-12 col-md-12 col-sm-12 font-col">
 
-        <!--- Note that these columns can be defined in any order.
-                  The actual rendered columns are set as a property on the row definition" -->
-
-        <!-- Position Column -->
-        <ng-container matColumnDef="fecha" class="font-col">
-          <th mat-header-cell *matHeaderCellDef class="font-col">  Fecha </th>
-          <td mat-cell *matCellDef="let element" class="font-col" > {{element.date}} </td>
-        </ng-container>
-        <ng-container matColumnDef="Nro">
-          <th mat-header-cell *matHeaderCellDef class="font-col"> Nro movimiento </th>
-          <td mat-cell *matCellDef="let element" class="font-col"> {{element.id}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="actividad">
-          <th mat-header-cell *matHeaderCellDef class="font-col"> Actividad </th>
-          <td mat-cell *matCellDef="let element" class="font-col"> {{element.type}} </td>
-        </ng-container>
-
-        <!-- Observation Column -->
-        <ng-container matColumnDef="observacion">
-          <th mat-header-cell *matHeaderCellDef class="font-col"> Observacion </th>
-          <td mat-cell *matCellDef="let element" class="font-col"> {{element.details}} </td>
-        </ng-container>
-
-        <!-- Credit Column -->
-        <ng-container matColumnDef="ingreso">
-          <th mat-header-cell *matHeaderCellDef class="font-col"> Ingreso </th>
-          <td mat-cell *matCellDef="let element" class="font-col"> {{element.credit | currency:'Gs ':'symbol':'1.0-0' }} </td>
-        </ng-container>
-
-        <!-- Debit Column -->
-        <ng-container matColumnDef="egreso">
-          <th mat-header-cell *matHeaderCellDef class="font-col"> Egreso </th>
-          <td mat-cell *matCellDef="let element" class="font-col"> {{element.debit | currency:'Gs ':'symbol':'1.0-0' }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="saldo">
-          <th mat-header-cell *matHeaderCellDef class="font-col"> Saldo </th>
-          <td mat-cell *matCellDef="let element" class="font-col"> {{element.balance | currency:'Gs ':'symbol':'1.0-0' }} </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-      <mat-paginator 
-                 [length]="this.ELEMENT_DATA.length"
-                 [pageSizeOptions]="[10,20,30]"
-                 aria-label="Select page of periodic elements"
-                 showFirstLastButtons
-                 (page)="changeView($event)"
-                 
-                 >
-  </mat-paginator>
+          <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+  
+          <!-- Position Column -->
+          <ng-container matColumnDef="fecha" class="font-col">
+            <th mat-header-cell *matHeaderCellDef class="font-col th-font">  Fecha </th>
+            <td mat-cell *matCellDef="let element" class="font-col td-font" > {{element.date}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Nro">
+            <th mat-header-cell *matHeaderCellDef class="font-col th-font"> Nro movimiento </th>
+            <td mat-cell *matCellDef="let element" class="font-col td-font"> {{element.id}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="actividad">
+            <th mat-header-cell *matHeaderCellDef class="font-col th-font"> Actividad </th>
+            <td mat-cell *matCellDef="let element" class="font-col td-font"> {{element.type}} </td>
+          </ng-container>
+  
+          <!-- Observation Column -->
+          <ng-container matColumnDef="observacion">
+            <th mat-header-cell *matHeaderCellDef class="font-col th-font"> Observacion </th>
+            <td mat-cell *matCellDef="let element" class="font-col td-font observacion-container"> {{element.details}} </td>
+          </ng-container>
+  
+          <!-- Credit Column -->
+          <ng-container matColumnDef="ingreso">
+            <th mat-header-cell *matHeaderCellDef class="font-col th-font"> Ingreso </th>
+            <td mat-cell *matCellDef="let element" class="font-col td-font"> {{element.credit | currency:'Gs ':'symbol':'1.0-0' }} </td>
+          </ng-container>
+  
+          <!-- Debit Column -->
+          <ng-container matColumnDef="egreso">
+            <th mat-header-cell *matHeaderCellDef class="font-col th-font"> Egreso </th>
+            <td mat-cell *matCellDef="let element" class="font-col td-font"> {{element.debit | currency:'Gs ':'symbol':'1.0-0' }} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="saldo">
+            <th mat-header-cell *matHeaderCellDef class="font-col th-font"> Saldo </th>
+            <td mat-cell *matCellDef="let element" class="font-col td-font"> {{element.balance | currency:'Gs ':'symbol':'1.0-0' }} </td>
+          </ng-container>
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef class="font-col th-font"> acciones </th>
+            <td mat-cell *matCellDef="let element" (click)="openDialog()" class="font-col td-font">  
+              <button mat-mini-fab color="primary" class=" " matTooltip="Modifica el movimiento">
+              <mat-icon>edit</mat-icon></button>
+                
+            <button mat-mini-fab color="warn" class=" " matTooltip="Elimina el movimiento">
+              <mat-icon>delete_forever</mat-icon></button> 
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator 
+                   [length]="this.ELEMENT_DATA.length"
+                   [pageSizeOptions]="[10,20,30]"
+                   aria-label="Select page of periodic elements"
+                   showFirstLastButtons
+                   (page)="changeView($event)"
+                   
+                   >
+    </mat-paginator>
+      </div>
+      
     </ng-template>
     
   </div>
