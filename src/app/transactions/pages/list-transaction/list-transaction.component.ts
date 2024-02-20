@@ -16,7 +16,6 @@ export interface TransactionElement {
   type: string;
   credit: number;
   debit: number;
-  balance: number;
 
 
 }
@@ -31,7 +30,7 @@ export class ListTransactionComponent implements OnInit{
   public debit:string = "D";
   public credit:string = "C";
   public ELEMENT_DATA: TransactionElement[] = [];
-  displayedColumns: string[] = ['fecha', 'Nro', 'actividad', 'observacion', 'ingreso', 'egreso', 'saldo','acciones'];
+  displayedColumns: string[] = ['fecha', 'Nro', 'actividad', 'observacion', 'ingreso', 'egreso','acciones'];
   dataSource =new MatTableDataSource<TransactionElement>(this.ELEMENT_DATA)
   types: TransactionType[] = [];
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
@@ -56,12 +55,10 @@ export class ListTransactionComponent implements OnInit{
   }
 
   openDialog(nro:number):void{
-    console.log(nro);
-    
-
     const dialogRef = this.dialog.open(DialogComponent,{
       width:'50%',
       data: this.ELEMENT_DATA.find( x => x.id = nro)
+
     })
     dialogRef.afterClosed().subscribe(result => {
       
@@ -82,7 +79,6 @@ export class ListTransactionComponent implements OnInit{
         res.data.details.forEach(data => {
           let trElement: TransactionElement = {
             id: data.transactionId,
-            balance: data.currentBalance,
             date: data.registeredDate,
             details: data.transactionDetail,
             type: data.transactionTypeName,
@@ -92,32 +88,25 @@ export class ListTransactionComponent implements OnInit{
           this.ELEMENT_DATA.push(trElement);
 
         })
-
         this.addData()
       }
       )
-
-
   }
 
   addData(): void {
     this.dataSource = new MatTableDataSource<TransactionElement>(this.ELEMENT_DATA.slice(0,10))
     this.dataSource.paginator = this.paginator
-
   }
+
   filter(): void {
     const { transactionDateStart, transactionDateEnd, transactionActivite, transactionType } = this.transactionListForm.value;
     let startDate = '';
     let endDate = ''
-debugger;
     if(transactionDateStart) 
       startDate= formatDate(transactionDateStart,'yyyy-MM-dd', 'en-US')
     if(transactionDateEnd) 
       endDate = formatDate(transactionDateEnd,'yyyy-MM-dd', 'en-US')
-    debugger;
     this.getTranasctionDetails(startDate ,endDate ,transactionActivite,transactionType);
-    
-    console.log(transactionDateStart, transactionDateEnd);
   }
 
   getTypes(): void {
@@ -125,15 +114,14 @@ debugger;
       this.transactionService.getTransactionTypes()
         .subscribe((res: TransactionTypePosResData) => {
           res.data.transactionTypes.forEach(tr => this.types.push(tr));
-          console.log(this.types);
         }
       )
     }
     else{
       this.types = this.transactionService.transactionTypes;
     }
-
   }
+
   changeView(event:PageEvent):void{
     const startIndex = event.pageIndex * event.pageSize;
     let endIndex = startIndex + event.pageSize
@@ -142,10 +130,8 @@ debugger;
 
     }
     this.dataSource.data = this.ELEMENT_DATA.slice(startIndex,endIndex)
-    
-    console.log('change');
-    
   }
+
   clearTable():void{
     this.getTranasctionDetails('','','','');
     this.transactionListForm.reset();

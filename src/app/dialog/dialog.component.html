@@ -2,28 +2,28 @@
   <mat-card>
     <mat-card-content class="row">
         <mat-card-title>Modificar</mat-card-title>
+
         <mat-form-field class="col-lg-6">
             <mat-label>Seleccione la fecha del movimiento</mat-label>
             <input formControlName="transactionDate" matInput [matDatepicker]="picker">
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
+
           <mat-form-field  class="col-lg-6">
             <mat-label>Monto</mat-label>
             <input 
                 matInput 
                 placeholder="Ingrese el monto del movimiento "
                 formControlName="amount"
-                [value]="data.credit?data.credit:data.debit"
                 >
             <mat-icon matSuffix>monetization_on</mat-icon>
+
         </mat-form-field>
         <mat-form-field  class="col-lg-6">
             <mat-label>Detalle</mat-label>
-            <mat-select 
-                formControlName="details"
-                >
-                <mat-option >prueba1</mat-option>
+            <mat-select formControlName="details">
+                <mat-option  *ngFor="let item of types" [value]="item.id">{{item.description}}</mat-option>
             </mat-select>        
             <mat-icon matSuffix>description</mat-icon>
 
