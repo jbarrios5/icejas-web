@@ -12,17 +12,20 @@ import { TransactionService } from "../transactions/service/transactions.service
   })
 export class DialogComponent implements OnInit{
   public dialogFormGroup = new FormGroup({
-    amount: new FormControl('',{nonNullable:true}),
-    details: new FormControl('',{nonNullable:true}),
-    observation: new FormControl('',{nonNullable:true}),
-    typeTransaction: new FormControl('',{nonNullable:true}),
-    transactionDate: new FormControl('',{nonNullable:true})
+    amountDialog: new FormControl(0,{nonNullable:true}),
+    detailsDialog: new FormControl('',{nonNullable:true}),
+    observationDialog: new FormControl('',{nonNullable:true}),
+    typeTransactionDialog: new FormControl('',{nonNullable:true}),
+    transactionDateDialog: new FormControl('',{nonNullable:true})
   })
   types:TransactionType[]=[];
 
-  constructor(public dialogRef:DialogRef<DialogComponent>,@Inject(MAT_DIALOG_DATA) public data: TransactionElement, private transactionService:TransactionService){}
+  constructor(public dialogRef:DialogRef<DialogComponent>,@Inject(MAT_DIALOG_DATA) public data: TransactionElement[], private transactionService:TransactionService){}
+  
   ngOnInit(): void {
     this.getTypes()
+    this.loadData()
+    
   }
   
   
@@ -34,6 +37,12 @@ export class DialogComponent implements OnInit{
   getTypes():void{
     this.types = this.transactionService.transactionTypes;
 
+  }
+  loadData():void{
+    console.log(this.data);
+    
+    this.dialogFormGroup.controls['amountDialog'].setValue(this.data[0].credit !== 0?this.data[0].credit:this.data[0].debit);
+    this.dialogFormGroup.controls['observationDialog'].setValue(this.data[0].details);
   }
 
 }

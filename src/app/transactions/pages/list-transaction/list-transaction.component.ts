@@ -55,12 +55,15 @@ export class ListTransactionComponent implements OnInit{
   }
 
   openDialog(nro:number):void{
+
+    
     const dialogRef = this.dialog.open(DialogComponent,{
       width:'50%',
-      data: this.ELEMENT_DATA.find( x => x.id = nro)
+      data: this.ELEMENT_DATA.filter( x => x.id === nro)
 
     })
     dialogRef.afterClosed().subscribe(result => {
+     
       
       console.log('The dialog was closed');
     });

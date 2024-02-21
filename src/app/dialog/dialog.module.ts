@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
+import { ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "../material/material.module";
 import { DialogComponent } from "./dialog.component";
 
@@ -7,7 +8,8 @@ import { DialogComponent } from "./dialog.component";
     declarations: [DialogComponent],
     imports: [
       CommonModule,
-      MaterialModule
+      MaterialModule,
+      ReactiveFormsModule,
      
     ],
     providers: []
