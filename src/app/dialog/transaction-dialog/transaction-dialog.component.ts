@@ -17,7 +17,7 @@ export class TransactionDialogComponent implements OnInit{
     detailsDialog: new FormControl(0,{nonNullable:true}),
     observationDialog: new FormControl('',{nonNullable:true}),
     typeTransactionDialog: new FormControl('',{nonNullable:true}),
-    transactionDateDialog: new FormControl('',{nonNullable:true})
+    transactionDateDialog: new FormControl(new Date(),{nonNullable:true})
   })
   types:TransactionType[]=[];
 
@@ -49,7 +49,15 @@ export class TransactionDialogComponent implements OnInit{
     this.dialogFormGroup.controls['detailsDialog'].setValue(detail[0].id); //este es el mat option
     this.dialogFormGroup.controls['typeTransactionDialog'].setValue(this.data[0].credit !== 0?'Ingreso':'Gasto')
     this.dialogFormGroup.controls['typeTransactionDialog'].disable();
-    this.dialogFormGroup.controls['transactionDateDialog'].setValue(this.data[0].date);
+    debugger;
+    const year = this.data[0].date.substring(0, 4);
+    const month = this.data[0].date.substring(5, 7);
+    const day = this.data[0].date.substring(8, 10);
+    // Crea un objeto Date en la zona horaria local
+    const localDate = new Date(parseInt(year), parseInt(month) -1, parseInt(day));
+    console.log(localDate);
+    
+    this.dialogFormGroup.controls['transactionDateDialog'].setValue(localDate);
   }
 
 }
