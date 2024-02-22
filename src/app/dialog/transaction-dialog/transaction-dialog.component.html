@@ -3,14 +3,15 @@
     <mat-card-content class="row" [formGroup]="dialogFormGroup" >
 
         <mat-card-title>Modificar</mat-card-title>
-          <mat-form-field class="col-lg-6" >
+        <br>
+          <mat-form-field class="col-lg-6 col-md-12 col-sm-12" >
               <mat-label>Seleccione la fecha del movimiento</mat-label>
               <input formControlName="transactionDateDialog" matInput [matDatepicker]="picker">
               <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
 
-            <mat-form-field  class="col-lg-6">
+            <mat-form-field  class="col-lg-6 col-md-12 col-sm-12">
               <mat-label>Monto</mat-label>
               <input 
                   matInput 
@@ -20,7 +21,7 @@
               <mat-icon matSuffix>monetization_on</mat-icon>
 
           </mat-form-field>
-          <mat-form-field  class="col-lg-6">
+          <mat-form-field  class="col-lg-6 col-md-12 col-sm-12">
               <mat-label>Detalle</mat-label>
               <mat-select formControlName="detailsDialog">
                   <mat-option  *ngFor="let item of types" [value]="item.id">{{item.description}}</mat-option>
@@ -28,14 +29,14 @@
               <mat-icon matSuffix>description</mat-icon>
 
           </mat-form-field>
-          <mat-form-field class="col-lg-6" >
+          <mat-form-field class="col-lg-6 col-md-12 col-sm-12" >
               <mat-label>Tipo de actividad </mat-label>
               <input  formControlName="typeTransactionDialog" matInput [value]="data[0].type" [readOnly]="isEditTypeActive">
 
               <mat-icon matSuffix>border_color</mat-icon>
           </mat-form-field>
           <br>
-          <mat-form-field class="col-lg-6" >
+          <mat-form-field class="col-lg-12 col-md-12 col-sm-12" >
               <mat-label>Observacion </mat-label>
               <input  formControlName="observationDialog" matInput [value]="data[0].details" >
 

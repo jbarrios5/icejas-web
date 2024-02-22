@@ -21,7 +21,7 @@ export class TransactionDialogComponent implements OnInit{
   })
   types:TransactionType[]=[];
 
-  constructor(public dialogRef:DialogRef<TransactionDialogComponent>,@Inject(MAT_DIALOG_DATA) public data: TransactionElement[], private transactionService:TransactionService){}
+  constructor(public dialogRef:DialogRef<string>,@Inject(MAT_DIALOG_DATA) public data: TransactionElement[], private transactionService:TransactionService){}
   
   ngOnInit(): void {
     this.getTypes()
@@ -31,7 +31,7 @@ export class TransactionDialogComponent implements OnInit{
   
   
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close("test");
   }
 
 

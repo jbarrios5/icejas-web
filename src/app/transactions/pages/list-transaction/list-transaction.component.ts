@@ -9,6 +9,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TransactionDialogComponent } from 'src/app/dialog/transaction-dialog/transaction-dialog.component';
+import { DeleteDialogComponet } from 'src/app/dialog/delete-dialog/delete-dialog.component';
 export interface TransactionElement {
   date: string;
   id: number;
@@ -55,10 +56,10 @@ export class ListTransactionComponent implements OnInit{
   }
 
   openDialog(nro:number):void{
-
-    
     const dialogRef = this.dialog.open(TransactionDialogComponent,{
       width:'50%',
+      enterAnimationDuration:'400ms',
+      exitAnimationDuration:'500ms',
       data: this.ELEMENT_DATA.filter( x => x.id === nro)
 
     })
@@ -66,6 +67,20 @@ export class ListTransactionComponent implements OnInit{
      
       
       console.log('The dialog was closed');
+    });
+  }
+  openDialogDelete(nro:number):void{
+    const dialogRefDelete = this.dialog.open(DeleteDialogComponet,{
+      width:'30%',
+      enterAnimationDuration:'400ms',
+      exitAnimationDuration:'500ms',
+      data:nro
+      
+
+    })
+    dialogRefDelete.afterClosed().subscribe(result => {
+      if(result)
+        this.deleteTransaction(nro);
     });
   }
 
@@ -139,4 +154,10 @@ export class ListTransactionComponent implements OnInit{
     this.getTranasctionDetails('','','','');
     this.transactionListForm.reset();
   }
+
+  deleteTransaction(nro:number):void{
+    console.log(`Numero de transacion ${nro}`);
+    
+  }
+
 }
