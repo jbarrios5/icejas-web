@@ -8,7 +8,7 @@ import { TransactionType, TransactionTypePosResData } from '../../interface/tran
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogComponent } from 'src/app/dialog/dialog.component';
+import { TransactionDialogComponent } from 'src/app/dialog/transaction-dialog/transaction-dialog.component';
 export interface TransactionElement {
   date: string;
   id: number;
@@ -57,7 +57,7 @@ export class ListTransactionComponent implements OnInit{
   openDialog(nro:number):void{
 
     
-    const dialogRef = this.dialog.open(DialogComponent,{
+    const dialogRef = this.dialog.open(TransactionDialogComponent,{
       width:'50%',
       data: this.ELEMENT_DATA.filter( x => x.id === nro)
 
