@@ -74,3 +74,11 @@ export interface TransactionPutRes{
     message:string;
     status:boolean;
 }
+
+export interface TransactionDeleteResData{
+    data:TransactionPutRes;
+}
+export interface TransactionDeleteRes{
+    message:string;
+    status:boolean;
+}

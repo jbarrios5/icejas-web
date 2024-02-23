@@ -34,6 +34,7 @@ export class ListTransactionComponent implements OnInit{
   displayedColumns: string[] = ['fecha', 'Nro', 'actividad', 'observacion', 'ingreso', 'egreso','acciones'];
   dataSource =new MatTableDataSource<TransactionElement>(this.ELEMENT_DATA)
   types: TransactionType[] = [];
+  church!:Church;
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
 
  
@@ -159,6 +160,26 @@ export class ListTransactionComponent implements OnInit{
 
   deleteTransaction(nro:number):void{
     console.log(`Numero de transacion ${nro}`);
+    this.church = JSON.parse(localStorage.getItem("church") || '') 
+    this.transactionService.deleteTransaction(nro,this.church.id).subscribe(
+      res => {
+        if(res){
+          Swal.fire({
+            icon: 'success',
+            title: 'Movimiento eliminado exitosamente!',
+            timer: 1500,
+            timerProgressBar: true,
+            showConfirmButton: false
+           
+        })
+       
+        this.getTranasctionDetails('','','','');
+
+        }else{
+            Swal.fire('Error', 'Error inesperado', 'error')
+        } 
+      } 
+    )
     
   }
 

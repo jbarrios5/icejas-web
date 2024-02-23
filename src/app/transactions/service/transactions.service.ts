@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map, Observable, tap,of,catchError } from "rxjs";
 import { environments } from "src/app/environments/environments";
-import { Transaction, TransactionDetailGetResData, TransactionPostReqData, TransactionPostResData, TransactionPutResData, TransactionType, TransactionTypePosResData } from "../interface/transaction.interface";
+import { Transaction, TransactionDeleteResData, TransactionDetailGetResData, TransactionPostReqData, TransactionPostResData, TransactionPutResData, TransactionType, TransactionTypePosResData } from "../interface/transaction.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +52,20 @@ export class TransactionService {
         return of(false)})
     )
   }
-
+  deleteTransaction(nro:number,churchId:number):Observable<boolean>{
+    return this.httpClient.delete<TransactionDeleteResData>( `${environments.icejasBaseUrl}/?transactionId=${nro}&churchId=${churchId}`)
+    .pipe(
+      map( res => {
+        if(res.data)
+          return true
+        else
+          return false 
+      }),
+      catchError( (error) =>  {
+        console.warn(error)
+        
+        return of(false)})
+    )
+  }
 
 }
