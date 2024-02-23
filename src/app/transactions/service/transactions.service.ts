@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map, Observable, tap } from "rxjs";
+import { map, Observable, tap,of,catchError } from "rxjs";
 import { environments } from "src/app/environments/environments";
-import { Transaction, TransactionDetailGetResData, TransactionPostReqData, TransactionPostResData, TransactionType, TransactionTypePosResData } from "../interface/transaction.interface";
+import { Transaction, TransactionDetailGetResData, TransactionPostReqData, TransactionPostResData, TransactionPutResData, TransactionType, TransactionTypePosResData } from "../interface/transaction.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +36,22 @@ export class TransactionService {
     return this.httpClient.get<TransactionDetailGetResData>(
       `${environments.icejasBaseUrl}/?churchId=${churchId}&startDate=${dateStart}&endDate=${dateEnd}&activiteType=${activiteType}&transactionType=${transactionType}`);
   }
+
+  updateTransaction(req:TransactionPostReqData):Observable<boolean>{
+    return this.httpClient.put<TransactionPutResData>( `${environments.icejasBaseUrl}/`,req)
+    .pipe(
+      map( res => {
+        if(res.data)
+          return true
+        else
+          return false 
+      }),
+      catchError( (error) =>  {
+        console.warn(error)
+        
+        return of(false)})
+    )
+  }
+
 
 }

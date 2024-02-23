@@ -63,11 +63,13 @@ export class ListTransactionComponent implements OnInit{
       data: this.ELEMENT_DATA.filter( x => x.id === nro)
 
     })
-    dialogRef.afterClosed().subscribe(result => {
-     
-      
-      console.log('The dialog was closed');
-    });
+    dialogRef.beforeClosed().subscribe( (result =>{
+      console.log(result);
+      if(result)
+        this.getTranasctionDetails('','','','')
+
+    }))
+    
   }
   openDialogDelete(nro:number):void{
     const dialogRefDelete = this.dialog.open(DeleteDialogComponet,{

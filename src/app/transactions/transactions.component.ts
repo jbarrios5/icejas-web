@@ -38,7 +38,7 @@ export class TransactionsComponent implements OnInit{
     details: new FormControl('',{nonNullable:true}),
     observation: new FormControl('',{nonNullable:true}),
     typeTransaction: new FormControl('',{nonNullable:true}),
-    transactionDate: new FormControl('',{nonNullable:true})
+    transactionDate: new FormControl(new Date(),{nonNullable:true})
   })
  
 
@@ -89,21 +89,21 @@ export class TransactionsComponent implements OnInit{
     
     
   processTransaction(): void {
-    debugger;
 
     const {amount,details,typeTransaction,transactionDate,observation}=this.transactionForm.value;
 
     this.transaction.amount = Number(amount) || 0;
     this.transaction.details = observation || 'Sin observacion'
-    this.transaction.registerDate = transactionDate!;
+    const agregarCeroSiEsNecesario = (numero:number) => (numero < 10 ? `0${numero}` : numero);
+    this.transaction.registerDate =  `${transactionDate?.getFullYear()}-${agregarCeroSiEsNecesario(transactionDate?.getMonth()! + 1)}-${agregarCeroSiEsNecesario(transactionDate?.getDate()!)}`;
     this.transactionType  = this.types.find(t => t.id === Number(details))!;
-    
     this.transactionPostReq.church = this.church
     this.transactionPostReq.transaction = this.transaction;
     this.transactionPostReq.transactionType = this.transactionType;
     this.transactionPostReq.userId = this.user.id;
     this.transactionPostReqData.data = this.transactionPostReq;
     this.transactionService.addTransaction(this.transactionPostReqData)
+    
     .subscribe((res:TransactionPostResData) => {
       if(res){
         Swal.fire({

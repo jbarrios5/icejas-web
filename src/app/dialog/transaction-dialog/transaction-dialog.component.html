@@ -49,6 +49,6 @@
   
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button color="warn" mat-flat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button color="primary"mat-flat-button [mat-dialog-close]="" cdkFocusInitial>Modificar</button>
+  <button mat-button color="warn" mat-flat-button (click)="onNoClick()" cdkFocusInitial>Cancelar</button>
+  <button mat-button color="primary"mat-flat-button (click)="updateTransaction()" >Modificar</button>
 </mat-dialog-actions>

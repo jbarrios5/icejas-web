@@ -67,3 +67,10 @@ export interface TransactionReportGetRes{
     totalCredit:number;
     month:number
 }
+export interface TransactionPutResData{
+    data:TransactionPutRes;
+}
+export interface TransactionPutRes{
+    message:string;
+    status:boolean;
+}
