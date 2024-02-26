@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Eliminar</h2>
+<mat-dialog-content>
+    ¿Estas seguro de eliminar el movimineto nro <b>{{nro}}</b> ?
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close cdkFocusInitial  (click)="onNoClick()" color="warn">No</button>
+  <button mat-button mat-dialog-close (click)="onClick()" color="primary">Ok</button>
+</mat-dialog-actions>

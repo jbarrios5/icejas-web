@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { canActiveGuard } from './auth/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -8,7 +9,12 @@ const routes: Routes = [
   },
   {
     path:'dashboard',
-    loadChildren: ()=> import('./dashboard/dashobard.module').then(m => m.DashboardModule)
+    loadChildren: ()=> import('./dashboard/dashobard.module').then(m => m.DashboardModule),
+    canActivate: [canActiveGuard]
+  },
+  {
+    path:'transaction',
+    loadChildren: ()=> import('./transactions/transactions.module').then(m => m.TransactionsModule)
   },
   {
     path:'**',

@@ -1,0 +1,15 @@
+.table{
+    width: 100%;
+    
+}
+.th-font{
+    font-size: 18px;
+}
+.td-font{
+    font-size: 16px;
+}
+.observacion-container {
+    max-width: 2px; /* Establece el ancho máximo que desees */
+    overflow: hidden; /* Oculta el texto que se desborda */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos (...) para indicar que hay más texto */
+  }

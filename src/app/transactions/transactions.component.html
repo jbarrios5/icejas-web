@@ -1,0 +1,72 @@
+<div class="container  mt-5">
+    <div class="row ">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6 ">
+            <mat-card>
+                <mat-card-content>
+                    <form [formGroup]="transactionForm">
+                        <mat-card-header class="mb-3">
+                            <mat-card-title>Registrar Movimiento</mat-card-title>
+
+                        </mat-card-header>
+
+                        <mat-form-field appearance="fill" class="w-100 ">
+                            <mat-label>Monto</mat-label>
+                            <input 
+                                matInput 
+                                placeholder="Ingrese el monto del movimiento "
+                                formControlName="amount"
+                                
+                                
+                                >
+                            <mat-icon matSuffix>monetization_on</mat-icon>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Detalle</mat-label>
+                            <mat-select 
+                                formControlName="details"
+                                (selectionChange)="setTypeTransaction()"
+                                
+                                >
+                                    
+                                <mat-option  *ngFor="let item of types" [value]="item.id">{{item.description}}</mat-option>
+                            </mat-select>        
+                            <mat-icon matSuffix>description</mat-icon>
+
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="w-100 " >
+                            <mat-label>Tipo de actividad </mat-label>
+                            <input  formControlName="typeTransaction" matInput [readOnly]="editable">
+
+                            <mat-icon matSuffix>border_color</mat-icon>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="w-100 " >
+                            <mat-label>Observacion </mat-label>
+                            <input  formControlName="observation" matInput [readOnly]="editable">
+
+                            <mat-icon matSuffix>border_color</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field class="w-100">
+                            <mat-label>Seleccione la fecha del movimiento</mat-label>
+                            <input formControlName="transactionDate" matInput [matDatepicker]="picker">
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+
+
+
+
+                        <button mat-button color="primary" class="w-100" mat-flat-button (click)="addTransaction()" >Registrar</button>
+                    </form>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+
+</div>

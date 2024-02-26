@@ -1,24 +1,37 @@
-<div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            {{card.title}}
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>Card Content Here</div>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+<div class="row mt-3 mx-5 mb-3 p-3">
+  <h1 class="mat-h1">{{'¡Hola '+ user.name+'!'}}</h1>
+  
+  <div class="row bg-white shadow p-3 mb-5">
+    <div class="col-lg-4 col-md-4 col-sm-12 bg-primary mt-2 text-white rounded ">
+      <h2>Saldo actual</h2>
+      <p class="text-center size"> <strong>{{church.currentBalance | currency:'Gs':'symbol':'1.0-0' }}</strong></p>
+      
+          
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12 bg-success mt-2 text-white rounded ">
+          <h2 class="">Ingreso mes actual</h2>
+          <p class="text-center size"><strong>{{totalCreditMonth | currency:'Gs':'symbol':'1.0-0' }}</strong> </p>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12 bg-secondary text-white mt-2  rounded ">
+      <h2 class="">Gasto mes actual</h2>
+      <p class="text-center size"><strong>{{totalDebitMonth | currency:'Gs':'symbol':'1.0-0' }}</strong> </p>
+</div>
+
+   
+  
+  </div>  
+   <div *ngIf="!this.finishedGetReport; else result;">
+      
+  </div>
+  <ng-template   #result> 
+    <div class="row ">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-10">
+        <graph-page  />  
+      </div>
+      <div class="col-lg-1"></div>
+    </div>
+   </ng-template> 
+  
+  
 </div>

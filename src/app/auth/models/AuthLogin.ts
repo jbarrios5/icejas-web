@@ -5,7 +5,7 @@ export interface AuthPostResData{
 
 export interface AuthPostRes{
     user:User
-    authLogin:AuthLogin
+    login:AuthLogin
 }
 
 export interface User{

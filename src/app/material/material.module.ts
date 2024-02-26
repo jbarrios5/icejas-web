@@ -17,11 +17,20 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatDatepickerModule} from '@angular/material/datepicker'
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatExpansionModule} from '@angular/material/expansion';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 @NgModule({
   exports: [
     MatAutocompleteModule,
+    MatTooltipModule,
     MatButtonModule,
+    MatPaginatorModule,
+    MatExpansionModule,
     MatCardModule,
     MatChipsModule,
     MatDialogModule,
@@ -36,7 +45,13 @@ import { MatMenuModule } from '@angular/material/menu';
     MatSnackBarModule,
     MatToolbarModule,
     MatTableModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+    
+    
+    
+    
   ]
 })
 export class MaterialModule { }

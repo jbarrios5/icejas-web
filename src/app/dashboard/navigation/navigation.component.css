@@ -3,7 +3,7 @@
 }
 
 .sidenav {
-  width: 200px;
+  width: 240px;
 }
 
 .sidenav .mat-toolbar {
@@ -15,3 +15,19 @@
   top: 0;
   z-index: 1;
 }
+.example-spacer {
+  flex: 1 1 auto;
+}
+.example-action-buttons {
+  padding-bottom: 20px;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}
+
