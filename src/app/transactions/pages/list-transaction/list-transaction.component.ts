@@ -58,15 +58,14 @@ export class ListTransactionComponent implements OnInit{
 
   openDialog(nro:number):void{
     const dialogRef = this.dialog.open(TransactionDialogComponent,{
-      width:'50%',
+      width: '85%',
       enterAnimationDuration:'400ms',
       exitAnimationDuration:'500ms',
       data: this.ELEMENT_DATA.filter( x => x.id === nro)
 
     })
     dialogRef.beforeClosed().subscribe( (result =>{
-      console.log(result);
-      if(result)
+      if(result === true)
         this.getTranasctionDetails('','','','')
 
     }))
@@ -74,7 +73,7 @@ export class ListTransactionComponent implements OnInit{
   }
   openDialogDelete(nro:number):void{
     const dialogRefDelete = this.dialog.open(DeleteDialogComponet,{
-      width:'30%',
+      width:'60%',
       enterAnimationDuration:'400ms',
       exitAnimationDuration:'500ms',
       data:nro
@@ -82,7 +81,7 @@ export class ListTransactionComponent implements OnInit{
 
     })
     dialogRefDelete.afterClosed().subscribe(result => {
-      if(result)
+      if(result === true)
         this.deleteTransaction(nro);
     });
   }
@@ -159,7 +158,6 @@ export class ListTransactionComponent implements OnInit{
   }
 
   deleteTransaction(nro:number):void{
-    console.log(`Numero de transacion ${nro}`);
     this.church = JSON.parse(localStorage.getItem("church") || '') 
     this.transactionService.deleteTransaction(nro,this.church.id).subscribe(
       res => {

@@ -48,8 +48,8 @@
     <div *ngIf="this.ELEMENT_DATA.length == 0;else data"><h2 class="text-center">No se encontraron datos en la tabla!!!</h2> </div>
 
     <ng-template #data>
-      <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" class=" col-lg-12 col-md-12 col-sm-12 font-col">
+      <div class="mat-elevation-z8 example-container " tabindex="0">
+        <table mat-table [dataSource]="dataSource" class="font-col">
 
           <!--- Note that these columns can be defined in any order.
                     The actual rendered columns are set as a property on the row definition" -->
@@ -107,7 +107,7 @@
                    aria-label="Select page of periodic elements"
                    showFirstLastButtons
                    (page)="changeView($event)"
-                   
+                   class="w-100"
                    >
     </mat-paginator>
       </div>

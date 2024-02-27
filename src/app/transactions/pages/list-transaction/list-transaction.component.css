@@ -2,6 +2,7 @@
     width: 100%;
     
 }
+
 .th-font{
     font-size: 18px;
 }
@@ -13,3 +14,19 @@
     overflow: hidden; /* Oculta el texto que se desborda */
     text-overflow: ellipsis; /* Agrega puntos suspensivos (...) para indicar que hay más texto */
   }
+
+  /* Este bloque solo se aplicará cuando el ancho de la ventana sea 800px o menos */
+@media (max-width: 800px) {
+    .example-container {
+        max-width: 100%;
+        overflow: auto;
+    }
+    .th-font{
+        font-size: 16px;
+    }
+    .td-font{
+        font-size: 14px;
+    }
+
+    
+}
