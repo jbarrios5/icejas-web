@@ -1,11 +1,13 @@
 import { inject } from "@angular/core";
 import { CanActivateFn, Router } from "@angular/router";
+import { AuthService } from "../services/auth.service";
 
 const checkAuthStatus = ():boolean => {
     const router: Router = inject(Router);
-    const result =true
-    
-    if(!localStorage.getItem("accessToken")){
+    const authService: AuthService = inject(AuthService);
+    if(!authService.accessToken || !authService.authUser){
+        
+        
         router.navigateByUrl("/auth")
         return false;
     }

@@ -1,10 +1,10 @@
 import Swal from 'sweetalert2';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { User } from '../auth/models/AuthLogin';
-import { Church } from './interface/church.interface';
-import { Transaction, TransactionPostReq, TransactionPostReqData, TransactionPostResData, TransactionType, TransactionTypePosResData } from './interface/transaction.interface';
-import { TransactionService } from './service/transactions.service';
+import { User } from '../../../auth/models/AuthLogin';
+import { Church } from '../../interface/church.interface';
+import { Transaction, TransactionPostReq, TransactionPostReqData, TransactionPostResData, TransactionType, TransactionTypePosResData } from '../../interface/transaction.interface';
+import { TransactionService } from '../../service/transactions.service';
 import { Router } from '@angular/router';
 
 

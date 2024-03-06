@@ -10,6 +10,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TransactionDialogComponent } from 'src/app/dialog/transaction-dialog/transaction-dialog.component';
 import { DeleteDialogComponet } from 'src/app/dialog/delete-dialog/delete-dialog.component';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { ADMIN_ROLE } from 'src/app/constants/icejas-constants';
 export interface TransactionElement {
   date: string;
   id: number;
@@ -31,7 +33,7 @@ export class ListTransactionComponent implements OnInit{
   public debit:string = "D";
   public credit:string = "C";
   public ELEMENT_DATA: TransactionElement[] = [];
-  displayedColumns: string[] = ['fecha', 'Nro', 'actividad', 'observacion', 'ingreso', 'egreso','acciones'];
+  displayedColumns: string[] = ['fecha', 'Nro', 'actividad', 'observacion', 'ingreso', 'egreso'];
   dataSource =new MatTableDataSource<TransactionElement>(this.ELEMENT_DATA)
   types: TransactionType[] = [];
   church!:Church;
@@ -44,14 +46,18 @@ export class ListTransactionComponent implements OnInit{
     transactionDateStart: new FormControl('', { nonNullable: true }),
     transactionDateEnd: new FormControl('', { nonNullable: true })
   })
+  public isAdmin:boolean = false
 
-
-  constructor(private transactionService: TransactionService, public dialog:MatDialog
+  constructor(private transactionService: TransactionService, public dialog:MatDialog,private authService:AuthService
     ) { 
     
   }
  
   ngOnInit(): void {
+    this.isAdmin = this.authService.authUser.role === ADMIN_ROLE
+    if(this.isAdmin)
+      this.displayedColumns.push('acciones')
+
     this.getTranasctionDetails('','','','');
     this.getTypes();
   }

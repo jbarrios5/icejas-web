@@ -1,14 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
-import { AuthPostReqData, AuthPostResData } from '../models/AuthLogin';
+import { AuthPostReq, AuthPostReqData, AuthPostRes, AuthPostResData, User } from '../models/AuthLogin';
 import { environments } from "../../environments/environments";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
+  public  authUser:User ={id:0,name:'',document:'',lastName:'',role:''};
   constructor(private httpClient:HttpClient) { }
   public accessToken:string = '';
   login(request:AuthPostReqData):Observable<AuthPostResData | undefined>{
@@ -24,7 +24,10 @@ export class AuthService {
     return this.httpClient.post<AuthPostResData>(URL,request,{headers:headers})
     .pipe(
       tap(
-        res => this.accessToken = res.data.login.accessToken
+        res =>{ 
+          this.accessToken = res.data.login.accessToken
+          this.authUser = res.data.user;
+        }
       )
     )
     
