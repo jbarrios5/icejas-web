@@ -1,0 +1,17 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from "@angular/common";
+import { BalanceReporComponent } from "./pages/balance/balance.component";
+import { ReportRouting } from './reports-routing.module';
+import { MaterialModule } from '../material/material.module';
+
+@NgModule({
+    declarations:[BalanceReporComponent],
+    imports:[
+        CommonModule,
+        ReportRouting,
+        MaterialModule
+    ],
+    providers:[]
+
+})
+export class ReportModule {}

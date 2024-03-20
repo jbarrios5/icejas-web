@@ -17,6 +17,11 @@ export class NavigationComponent implements OnInit{
     { label:'Listar ', icon: 'list',url:'/transaction/list' }
   
   ]
+
+  public sidebarItemsReport = [
+    { label:'Movimientos', icon: 'list',url:'/reports/balance' }
+  
+  ]
   public home = { label:'Inicio', icon: 'home',url:'/dashboard/home' }
   
   constructor(private router:Router,private authService:AuthService){}
