@@ -19,8 +19,7 @@ export class NavigationComponent implements OnInit{
   ]
 
   public sidebarItemsReport = [
-    { label:'Movimientos', icon: 'list',url:'/reports/balance' }
-  
+    { label:'Movimientos', icon:'receipt_long',url:'/reports/balance' }
   ]
   public home = { label:'Inicio', icon: 'home',url:'/dashboard/home' }
   
