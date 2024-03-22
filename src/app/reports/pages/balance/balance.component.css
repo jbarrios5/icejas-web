@@ -1,0 +1,56 @@
+.total{
+    font-size: 19px;
+}
+.total-amount{
+    font-size: 19px;
+    font-weight: bold;
+}
+.th-font{
+    font-size: 19px;
+}
+.td-font{
+    font-size: 18px;
+}
+@media (max-width: 800px) {
+    .example-container {
+        max-width: 100%;
+        overflow: auto;
+    }
+    .total-amount{
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .total{
+        font-size: 16px;
+    }
+    .th-font{
+        font-size: 16px;
+    }
+    .td-font{
+        font-size: 14px;
+    }
+}
+
+ /* Este bloque solo se aplicará cuando el ancho de la ventana sea 800px o menos */
+@media (max-width: 450px) {
+    .example-container {
+        max-width: 100%;
+        overflow: auto;
+    }
+    .table-report{
+        min-width: 400px;
+    }
+    .th-font{
+        font-size: 15px;
+    }
+    .td-font{
+        font-size: 13px;
+    }
+    .total-amount{
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .total{
+        font-size: 15px;
+    }
+}

@@ -32,5 +32,43 @@
             <button mat-button color="warn" class=" mx-1 col-lg-2 col-md-12 col-sm-12  text-center " mat-flat-button  >
               <mat-icon>cleaning_services </mat-icon> Limpiar </button>
           </form>
+          <div *ngIf="this.ELEMENT_DATA.length == 0;else data"><h2 class="text-center">No se encontraron datos en la tabla!!!</h2> </div>
+        
+          <ng-template #data>
+            <div class="mat-elevation-z8 example-container mt-2" tabindex="0">
+                <table mat-table [dataSource]="dataSource" class="font-col table-report">
+                    <!-- Month Column -->
+                    <ng-container matColumnDef="mes">
+                        <th mat-header-cell *matHeaderCellDef class="font-col th-font"> Mes </th>
+                        <td mat-cell *matCellDef="let element" class="font-col td-font observacion-container"> {{element.date}} </td>
+                        <td mat-footer-cell *matFooterCellDef class="total"> <b>Total</b> </td>
+                    </ng-container>
+
+                    <!-- Credit Column -->
+                    <ng-container matColumnDef="ingreso">
+                        <th mat-header-cell *matHeaderCellDef class="font-col th-font"> Ingreso </th>
+                        <td mat-cell *matCellDef="let element" class="font-col td-font"> {{element.credit | currency:'Gs ':'symbol':'1.0-0' }} </td>
+                        <td mat-footer-cell *matFooterCellDef> {{''}} </td>
+                    </ng-container>
+
+                    <!-- Debit Column -->
+                    <ng-container matColumnDef="egreso">
+                        <th mat-header-cell *matHeaderCellDef class="font-col th-font"> Egreso </th>
+                        <td mat-cell *matCellDef="let element" class="font-col td-font"> {{element.debit | currency:'Gs ':'symbol':'1.0-0' }} </td>
+                        <td mat-footer-cell *matFooterCellDef> {{''}} </td>
+                    </ng-container>
+                    <!-- Balance Column -->
+                    <ng-container matColumnDef="saldo">
+                        <th mat-header-cell *matHeaderCellDef class="font-col th-font"> Saldo </th>
+                        <td mat-cell *matCellDef="let element" class="font-col td-font"> {{element.balance | currency:'Gs ':'symbol':'1.0-0' }} </td>
+                        <td mat-footer-cell *matFooterCellDef class="total-amount">  {{sumAmount | currency:'Gs ':'symbol':'1.0-0' }}</td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+
+                </table>
+            </div>    
+          </ng-template>
     </div>
   </div>

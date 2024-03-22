@@ -1,5 +1,5 @@
 
 export const environments= {
-    authBaseUrl:'https://icejas.shop/mcs.auth/auth/v1',
-    icejasBaseUrl:'https://icejas.shop/mcs.icejas/transactions/v1'
+    authBaseUrl:'http://localhost:8081/mcs.auth/auth/v1',
+    icejasBaseUrl:'http://localhost:8083/mcs.icejas/transactions/v1'
 }
