@@ -5,6 +5,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { ADMIN_ROLE } from 'src/app/constants/icejas-constants';
+import { User } from 'src/app/auth/models/AuthLogin';
 
 @Component({
   selector: 'app-navigation',
@@ -23,10 +24,10 @@ export class NavigationComponent implements OnInit{
   ]
   public home = { label:'Inicio', icon: 'home',url:'/dashboard/home' }
   
-  constructor(private router:Router,private authService:AuthService){}
+  constructor(private router:Router){}
   ngOnInit(): void {
-    
-    if(this.authService.authUser.role === ADMIN_ROLE)
+    const user:User =  JSON.parse(localStorage.getItem("user")!);
+    if( user.role === ADMIN_ROLE)
       this.sidebarItems.unshift({ label:'Agregar ', icon: 'add_circle',url:'/transaction/add' })
   }
 

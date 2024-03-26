@@ -12,6 +12,7 @@ import { TransactionDialogComponent } from 'src/app/dialog/transaction-dialog/tr
 import { DeleteDialogComponet } from 'src/app/dialog/delete-dialog/delete-dialog.component';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { ADMIN_ROLE } from 'src/app/constants/icejas-constants';
+import { User } from 'src/app/auth/models/AuthLogin';
 export interface TransactionElement {
   date: string;
   id: number;
@@ -54,7 +55,8 @@ export class ListTransactionComponent implements OnInit{
   }
  
   ngOnInit(): void {
-    this.isAdmin = this.authService.authUser.role === ADMIN_ROLE
+    const user:User =  JSON.parse(localStorage.getItem("user")!);
+    this.isAdmin = user.role === ADMIN_ROLE
     if(this.isAdmin)
       this.displayedColumns.push('acciones')
 

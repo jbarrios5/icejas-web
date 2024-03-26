@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { MatTableDataSource } from "@angular/material/table";
+import { Router } from "@angular/router";
+import Swal from "sweetalert2";
 import {MONTHS} from "../../../constants/icejas-constants"
 import { ReportService } from "../../service/report.service";
 import {  buildEndMonth, buildStartMonth } from "./balance-util";
@@ -29,7 +31,7 @@ export class BalanceReporComponent implements OnInit{
   public displayedColumns: string[] = ['mes', 'ingreso', 'egreso', 'saldo'];
   public dataSource =new MatTableDataSource<TransactionReportElement>(this.ELEMENT_DATA)
  
-  constructor(private reportService:ReportService){}
+  constructor(private reportService:ReportService,private router:Router){}
 
   ngOnInit(): void {
     this.getTransactionSummary()
@@ -45,7 +47,8 @@ export class BalanceReporComponent implements OnInit{
       .subscribe(
         res => {
           if(!res){
-            console.log('Ocurrio un error',res);
+            Swal.fire('Error', 'Error inesperado', 'error')
+            this.router.navigateByUrl("/dashboard/home")
           }
           
           res.months.forEach( data =>{

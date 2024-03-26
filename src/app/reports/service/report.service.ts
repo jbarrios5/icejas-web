@@ -11,7 +11,7 @@ import { MonthSummaryGetResData } from "../interface/reports.interface";
   })
 export class ReportService {
 
-    constructor(private authService:AuthService,private httpClient: HttpClient){}
+    constructor(private httpClient: HttpClient){}
 
     getSummaryMonth(startMonth:string,endMonth:string):Observable<MonthSummaryGetResData>{
         const headers = new HttpHeaders(
@@ -21,7 +21,6 @@ export class ReportService {
               'Authorization':'Bearer '+ localStorage.getItem("accessToken")
             }
         )
-        
         return this.httpClient.get<MonthSummaryGetResData>(`${environments.icejasBaseUrl}/summary?startDate=${startMonth}&endDate=${endMonth}&churchId=1`,{ headers: headers })
         
 
