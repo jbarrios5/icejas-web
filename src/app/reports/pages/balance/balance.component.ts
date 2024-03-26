@@ -70,4 +70,9 @@ export class BalanceReporComponent implements OnInit{
     this.dataSource = new MatTableDataSource<TransactionReportElement>(this.ELEMENT_DATA)
   }
 
+  cleanData():void{
+    this.reportTransactionFormControl.controls['endMonth'].setValue(null)
+    this.reportTransactionFormControl.controls['startMonth'].setValue(null)
+    this.getTransactionSummary()
+  }
 }
