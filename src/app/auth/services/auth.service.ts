@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
 import { AuthPostReq, AuthPostReqData, AuthPostRes, AuthPostResData, User } from '../models/AuthLogin';
 import { environments } from "../../environments/environments";
@@ -10,6 +10,7 @@ import { environments } from "../../environments/environments";
 export class AuthService {
   public  authUser:User ={id:0,name:'',document:'',lastName:'',role:''};
   constructor(private httpClient:HttpClient) { }
+  
   public accessToken:string = '';
   login(request:AuthPostReqData):Observable<AuthPostResData | undefined>{
     const URL = `${environments.authBaseUrl}/login`;

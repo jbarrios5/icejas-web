@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
+import { FormControl, FormGroup } from "@angular/forms";
 import { MatTableDataSource } from "@angular/material/table";
 import {MONTHS} from "../../../constants/icejas-constants"
 import { ReportService } from "../../service/report.service";
+import {  buildEndMonth, buildStartMonth } from "./balance-util";
 export interface TransactionReportElement {
   date: string;
   credit: number;
@@ -16,6 +18,12 @@ export interface TransactionReportElement {
 export class BalanceReporComponent implements OnInit{
   public months:string[]  = MONTHS;
   public sumAmount:number = 0
+
+  //form control
+  public reportTransactionFormControl = new FormGroup({
+    startMonth: new FormControl(''),
+    endMonth: new FormControl('')
+  })
   //Table
   public ELEMENT_DATA: TransactionReportElement[] = [];
   public displayedColumns: string[] = ['mes', 'ingreso', 'egreso', 'saldo'];
@@ -29,7 +37,11 @@ export class BalanceReporComponent implements OnInit{
 
 
   getTransactionSummary():void{
-    this.reportService.getSummaryMonth("2024-01-01","2024-05-30")
+    let {startMonth,endMonth} = this.reportTransactionFormControl.value;
+    startMonth = buildStartMonth(startMonth ||'');
+    endMonth   = buildEndMonth(endMonth || ''); 
+    this.ELEMENT_DATA = []
+    this.reportService.getSummaryMonth(startMonth,endMonth)
       .subscribe(
         res => {
           if(!res){
@@ -46,13 +58,13 @@ export class BalanceReporComponent implements OnInit{
             this.ELEMENT_DATA.push(trElement);
           })
           this.sumAmount  =res.totalSum
+          this.addData()
         }
         
       )
   }
   addData(): void {
     this.dataSource = new MatTableDataSource<TransactionReportElement>(this.ELEMENT_DATA)
-    
   }
 
 }

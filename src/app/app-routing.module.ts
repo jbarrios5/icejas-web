@@ -14,10 +14,12 @@ const routes: Routes = [
   },
   {
     path:'transaction',
+    canActivate: [canActiveGuard],
     loadChildren: ()=> import('./transactions/transactions.module').then(m => m.TransactionsModule)
   },
   {
     path:'reports',
+    canActivate: [canActiveGuard],
     loadChildren: ()=> import('./reports/reports.module').then(m => m.ReportModule)
   },
   {

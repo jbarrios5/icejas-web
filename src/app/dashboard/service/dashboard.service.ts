@@ -32,7 +32,7 @@ export class DashboardService {
       {
         'Content-Type': 'application/json',
         'apiKey': "icejas-088cad7b-7a3b-4a04-b0c5-f4b0796e5b89",
-        'Authorization':'Bearer '+ this.authService.accessToken
+        'Authorization':'Bearer '+ localStorage.getItem("accessToken")
         
       }
     )
@@ -44,7 +44,7 @@ export class DashboardService {
       {
         'Content-Type': 'application/json',
         'apiKey': "icejas-088cad7b-7a3b-4a04-b0c5-f4b0796e5b89",
-        'Authorization':'Bearer '+ this.authService.accessToken
+        'Authorization':'Bearer '+ localStorage.getItem("accessToken")
         
       }
     )

@@ -2,13 +2,13 @@
 
 <div class="container ">
     <div class="row ">
-        <div class="col-3"></div>
-        <div class="col-6">
+        <div class="col-lg-3 col-md-2 col-sm-1"></div>
+        <div class="col-lg-6 col-md-7 col-sm-9">
             <img src="https://icejas.shop/church.jpg" class="img-fluid" alt="...">
             <h1 class="display-1">LOGIN</h1>
 
             <form [formGroup]="authForm" > 
-                <button class="col-lg-12 mb-2" *ngIf="hasError" mat-button    color="warn">{{errorMessage}}</button>
+                <button class="col-lg-12  mb-2" *ngIf="hasError" mat-button    color="warn">{{errorMessage}}</button>
 
                 <mat-form-field  class="col-lg-12" appearance="fill">
                     <mat-label>Documento</mat-label>
@@ -42,7 +42,7 @@
 
             > <mat-icon>save</mat-icon> Ingresar</button>
         </div>
-        <div class="col-3"></div>
+        <div class="col-lg-3 col-md-2 col-sm-1"></div>
     </div>
 
 

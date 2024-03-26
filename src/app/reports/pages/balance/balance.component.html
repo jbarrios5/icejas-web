@@ -6,10 +6,10 @@
     </div>
     
     <div>
-        <form class="mt-2">
+        <form class="mt-2" [formGroup]="reportTransactionFormControl">
             <mat-form-field  class="col-lg-3 col-md-12 col-sm-12 mx-1">
               <mat-label>Mes desde</mat-label>
-              <mat-select >
+              <mat-select formControlName="startMonth">
       
                 <mat-option *ngFor="let item of months" [value]="item">{{item}}</mat-option>
               </mat-select>
@@ -17,22 +17,22 @@
       
             </mat-form-field>
               
-            <mat-form-field  class="col-lg-3 col-md-12 col-sm-12 mx-1">
+            <mat-form-field   class="col-lg-3 col-md-12 col-sm-12 mx-1">
                 <mat-label>Mes hasta</mat-label>
-                <mat-select >
+                <mat-select formControlName="endMonth">
         
                   <mat-option *ngFor="let item of months" [value]="item">{{item}}</mat-option>
                 </mat-select>
                 <mat-icon matSuffix>calendar_month</mat-icon>
         
             </mat-form-field>
-            <button mat-button color="primary" class=" mx-1 col-lg-2 col-md-12 col-sm-12 text-center " mat-flat-button  >
+            <button mat-button color="primary" class=" mx-1 col-lg-2 col-md-12 col-sm-12 text-center " mat-flat-button (click)="this.getTransactionSummary()" >
               <mat-icon>search</mat-icon>Filtrar</button>
                 
             <button mat-button color="warn" class=" mx-1 col-lg-2 col-md-12 col-sm-12  text-center " mat-flat-button  >
               <mat-icon>cleaning_services </mat-icon> Limpiar </button>
           </form>
-          <div *ngIf="this.ELEMENT_DATA.length == 0;else data"><h2 class="text-center">No se encontraron datos en la tabla!!!</h2> </div>
+          <div *ngIf="this.ELEMENT_DATA.length === 0;else data"><h2 class="text-center">No se encontraron datos en la tabla!!!</h2> </div>
         
           <ng-template #data>
             <div class="mat-elevation-z8 example-container mt-2" tabindex="0">

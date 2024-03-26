@@ -17,14 +17,14 @@
         overflow: auto;
     }
     .total-amount{
-        font-size: 16px;
+        font-size: 14px;
         font-weight: bold;
     }
     .total{
-        font-size: 16px;
+        font-size: 15px;
     }
     .th-font{
-        font-size: 16px;
+        font-size: 14px;
     }
     .td-font{
         font-size: 14px;
@@ -41,16 +41,16 @@
         min-width: 400px;
     }
     .th-font{
-        font-size: 15px;
-    }
-    .td-font{
         font-size: 13px;
     }
+    .td-font{
+        font-size: 12px;
+    }
     .total-amount{
-        font-size: 15px;
+        font-size: 12px;
         font-weight: bold;
     }
     .total{
-        font-size: 15px;
+        font-size: 14px;
     }
 }

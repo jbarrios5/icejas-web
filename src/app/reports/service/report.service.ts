@@ -18,7 +18,7 @@ export class ReportService {
             {
               'Content-Type': 'application/json',
               'apiKey': API_KEY,
-              'Authorization':'Bearer '+ this.authService.accessToken
+              'Authorization':'Bearer '+ localStorage.getItem("accessToken")
             }
         )
         

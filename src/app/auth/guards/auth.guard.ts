@@ -4,10 +4,8 @@ import { AuthService } from "../services/auth.service";
 
 const checkAuthStatus = ():boolean => {
     const router: Router = inject(Router);
-    const authService: AuthService = inject(AuthService);
-    if(!authService.accessToken || !authService.authUser){
-        
-        
+    const at = localStorage.getItem("accessToken")
+    if(!at || at.length === 0){
         router.navigateByUrl("/auth")
         return false;
     }
