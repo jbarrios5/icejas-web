@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { NavigationComponent } from "../dashboard/navigation/navigation.component";
 import { ListTransactionComponent } from "./pages/list-transaction/list-transaction.component";
-import { TransactionsComponent } from "./transactions.component";
+import { TransactionsComponent } from "./pages/add-transaction/transactions.component";
 
 const routes: Routes = [
     {

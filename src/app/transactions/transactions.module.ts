@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { TransactionsComponent } from './transactions.component';
+import { TransactionsComponent } from './pages/add-transaction/transactions.component';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransactionRouting } from './transaction-routing.module';
 import { ListTransactionComponent } from './pages/list-transaction/list-transaction.component';
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { DialogModule } from '../dialog/dialog.module';
+import { MatCardModule } from '@angular/material/card';
 export const MY_DATE_FORMATS = {
   parse: {
     dateInput: 'DD-MM-YYYY',
@@ -27,7 +28,8 @@ export const MY_DATE_FORMATS = {
     FormsModule,
     TransactionRouting,
     ReactiveFormsModule,
-    DialogModule
+    DialogModule,
+    MatCardModule
 
   ],
   providers: [DatePipe,

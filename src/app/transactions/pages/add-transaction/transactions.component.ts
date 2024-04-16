@@ -1,13 +1,11 @@
 import Swal from 'sweetalert2';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { User } from '../auth/models/AuthLogin';
-import { Church } from './interface/church.interface';
-import { Transaction, TransactionPostReq, TransactionPostReqData, TransactionPostResData, TransactionType, TransactionTypePosResData } from './interface/transaction.interface';
-import { TransactionService } from './service/transactions.service';
-import { HttpClient } from '@angular/common/http';
+import { User } from '../../../auth/models/AuthLogin';
+import { Church } from '../../interface/church.interface';
+import { Transaction, TransactionPostReq, TransactionPostReqData, TransactionPostResData, TransactionType, TransactionTypePosResData } from '../../interface/transaction.interface';
+import { TransactionService } from '../../service/transactions.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 
 
@@ -55,8 +53,6 @@ export class TransactionsComponent implements OnInit{
     this.transactionService.getTransactionTypes()
     .subscribe((res:TransactionTypePosResData) => {
       res.data.transactionTypes.forEach(tr => this.types.push(tr));
-      console.log(this.types);
-      
     }
     )
   }
@@ -126,14 +122,8 @@ export class TransactionsComponent implements OnInit{
   }
   setTypeTransaction():void{
     const {amount,details,typeTransaction,transactionDate}=this.transactionForm.value;
-    console.log(details);
     const category= this.types.find(x => (x.id === Number(details)))
-    console.log(category);
-    
     this.transactionForm.controls['typeTransaction'].setValue(category?.category === 'D'?'Gasto':'Ingreso')
-    
-    
-    
   }
 
 

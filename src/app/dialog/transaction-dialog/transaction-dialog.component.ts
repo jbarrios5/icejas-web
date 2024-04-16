@@ -72,7 +72,6 @@ export class TransactionDialogComponent implements OnInit{
   }
   updateTransaction():void{
     const {amountDialog ,detailsDialog,transactionDateDialog,observationDialog}=this.dialogFormGroup.value;
-    debugger;
     this.transaction.amount = Number(amountDialog) || 0;
     this.transaction.details = observationDialog || 'Sin observacion'
     const agregarCeroSiEsNecesario = (numero:number) => (numero < 10 ? `0${numero}` : numero);

@@ -5,7 +5,8 @@ import { TransactionReportGetRes, TransactionReportGetResData } from "src/app/tr
 
 @Component({
     selector: 'graph-page',
-    templateUrl: './graph.component.html'
+    templateUrl: './graph.component.html',
+    styleUrls:['./graph.component.css']
   })
 export class GraphComponent implements OnInit{
     

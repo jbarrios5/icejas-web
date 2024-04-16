@@ -34,9 +34,6 @@ export class HomeComponent implements OnInit{
     
 
   }
-
-  
-    
   getUser():void{
     const user = localStorage.getItem('user') || '';
     let userStr:User = JSON.parse(user);
@@ -53,13 +50,9 @@ export class HomeComponent implements OnInit{
   }
 
   getReport():void{
-    console.log("antes de obtener reportes",this.finishedGetReport);
-    
     this.dashboardService.getReport().subscribe
     (
       (res)=>{
-        console.log(res);
-        
         if(!res)
           this.finishedGetReport =false
         else{
@@ -67,7 +60,6 @@ export class HomeComponent implements OnInit{
           this.totalCreditMonth = res.data.at(-1)!.totalCredit ;
           this.totalDebitMonth = res.data.at(-1)!.totalDebit ;
         }
-          console.log("despuesde obtener reportes",this.finishedGetReport);
       }
     )
   }

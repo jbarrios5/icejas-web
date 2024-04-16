@@ -10,6 +10,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TransactionDialogComponent } from 'src/app/dialog/transaction-dialog/transaction-dialog.component';
 import { DeleteDialogComponet } from 'src/app/dialog/delete-dialog/delete-dialog.component';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { ADMIN_ROLE } from 'src/app/constants/icejas-constants';
+import { User } from 'src/app/auth/models/AuthLogin';
 export interface TransactionElement {
   date: string;
   id: number;
@@ -31,7 +34,7 @@ export class ListTransactionComponent implements OnInit{
   public debit:string = "D";
   public credit:string = "C";
   public ELEMENT_DATA: TransactionElement[] = [];
-  displayedColumns: string[] = ['fecha', 'Nro', 'actividad', 'observacion', 'ingreso', 'egreso','acciones'];
+  displayedColumns: string[] = ['fecha', 'Nro', 'actividad', 'observacion', 'ingreso', 'egreso'];
   dataSource =new MatTableDataSource<TransactionElement>(this.ELEMENT_DATA)
   types: TransactionType[] = [];
   church!:Church;
@@ -44,29 +47,33 @@ export class ListTransactionComponent implements OnInit{
     transactionDateStart: new FormControl('', { nonNullable: true }),
     transactionDateEnd: new FormControl('', { nonNullable: true })
   })
+  public isAdmin:boolean = false
 
-
-  constructor(private transactionService: TransactionService, public dialog:MatDialog
+  constructor(private transactionService: TransactionService, public dialog:MatDialog,private authService:AuthService
     ) { 
     
   }
  
   ngOnInit(): void {
+    const user:User =  JSON.parse(localStorage.getItem("user")!);
+    this.isAdmin = user.role === ADMIN_ROLE
+    if(this.isAdmin)
+      this.displayedColumns.push('acciones')
+
     this.getTranasctionDetails('','','','');
     this.getTypes();
   }
 
   openDialog(nro:number):void{
     const dialogRef = this.dialog.open(TransactionDialogComponent,{
-      width:'50%',
+      width: '85%',
       enterAnimationDuration:'400ms',
       exitAnimationDuration:'500ms',
       data: this.ELEMENT_DATA.filter( x => x.id === nro)
 
     })
     dialogRef.beforeClosed().subscribe( (result =>{
-      console.log(result);
-      if(result)
+      if(result === true)
         this.getTranasctionDetails('','','','')
 
     }))
@@ -74,7 +81,7 @@ export class ListTransactionComponent implements OnInit{
   }
   openDialogDelete(nro:number):void{
     const dialogRefDelete = this.dialog.open(DeleteDialogComponet,{
-      width:'30%',
+      width:'60%',
       enterAnimationDuration:'400ms',
       exitAnimationDuration:'500ms',
       data:nro
@@ -82,7 +89,7 @@ export class ListTransactionComponent implements OnInit{
 
     })
     dialogRefDelete.afterClosed().subscribe(result => {
-      if(result)
+      if(result === true)
         this.deleteTransaction(nro);
     });
   }
@@ -159,7 +166,6 @@ export class ListTransactionComponent implements OnInit{
   }
 
   deleteTransaction(nro:number):void{
-    console.log(`Numero de transacion ${nro}`);
     this.church = JSON.parse(localStorage.getItem("church") || '') 
     this.transactionService.deleteTransaction(nro,this.church.id).subscribe(
       res => {
