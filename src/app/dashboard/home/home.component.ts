@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { User } from 'src/app/auth/models/AuthLogin';
 import { DashboardService } from '../service/dashboard.service';
 import { Church } from 'src/app/transactions/interface/church.interface';
+import { TransactionReportGetResData } from 'src/app/transactions/interface/transaction.interface';
 
 @Component({
   selector: 'app-home',
@@ -60,8 +61,21 @@ export class HomeComponent implements OnInit{
           this.totalCreditMonth = res.data.at(-1)!.totalCredit ;
           this.totalDebitMonth = res.data.at(-1)!.totalDebit ;
         }
+        this.verifyData(res)
       }
+      
     )
+  }
+
+  verifyData(res:TransactionReportGetResData):void{
+    console.log('antetede volver a verificar');
+    
+    if(res.data && res.data.length > 0 && this.totalDebitMonth === 0){
+      console.log('volviendo a cargar desde cero');
+      this.totalCreditMonth = res.data.at(-1)!.totalCredit ;
+      this.totalDebitMonth = res.data.at(-1)!.totalDebit ;
+    }
+
   }
   
   

@@ -20,7 +20,8 @@ export class NavigationComponent implements OnInit{
   ]
 
   public sidebarItemsReport = [
-    { label:'Movimientos', icon:'receipt_long',url:'/reports/balance' }
+    { label:'Movimientos', icon:'receipt_long',url:'/reports/balance' },
+    { label:'Resumen', icon:'monitoring',url:'/dashboard/resume' }
   ]
   public home = { label:'Inicio', icon: 'home',url:'/dashboard/home' }
   
