@@ -1,0 +1,28 @@
+.title-size{
+    font-size: 5vw;
+}
+.sub-title-size{
+    font-size: 3vw;
+    color: rgb(55, 54, 54);
+}
+.verse-text-size{
+    font-size: 2vw;
+    color: rgb(55, 54, 54);
+    line-height: 2;
+}
+
+@media screen and (max-width: 800px) {
+    .title-size {
+        font-size: 3rem; /* Tamaño ajustado para pantallas más pequeñas */
+        line-height: 1;
+    }
+
+    .sub-title-size {
+        font-size: 2.5rem; /* Tamaño ajustado para pantallas más pequeñas */
+        line-height: 1.2;
+    }
+    .verse-text-size{
+        font-size: 1.5rem;
+        color: rgb(55, 54, 54);
+        line-height: 1;}
+}
