@@ -18,22 +18,16 @@ export class HomeComponent implements OnInit{
     role:''
   };
   
-  church:Church ={
-    currentBalance :0,
-    created:'',
-    id:0,
-    name:''
-  };
-  public totalDebitMonth:number = 0;
-  public totalCreditMonth:number = 0;
+  
+  
   public finishedGetReport:boolean = false;
-  constructor(private dashboardService:DashboardService){}
-  ngOnInit(): void {
-    this.getReport();
-    this.getUser();
-    this.getChurch();
-    
+  constructor(private dashboardService:DashboardService){
+   
 
+  }
+  ngOnInit(): void {
+    this.getUser();
+    this.getReport();
   }
   getUser():void{
     const user = localStorage.getItem('user') || '';
@@ -41,14 +35,6 @@ export class HomeComponent implements OnInit{
     this.user = userStr;
   }
 
-  getChurch():void{
-    this.dashboardService.getChurch().subscribe(
-      (res:Church) => {
-        this.church= res
-        localStorage.setItem("church",JSON.stringify(this.church))
-      }
-    )
-  }
 
   getReport():void{
     this.dashboardService.getReport().subscribe
@@ -58,25 +44,13 @@ export class HomeComponent implements OnInit{
           this.finishedGetReport =false
         else{
           this.finishedGetReport = true;  
-          this.totalCreditMonth = res.data.at(-1)!.totalCredit ;
-          this.totalDebitMonth = res.data.at(-1)!.totalDebit ;
         }
-        this.verifyData(res)
       }
       
     )
   }
 
-  verifyData(res:TransactionReportGetResData):void{
-    console.log('antetede volver a verificar');
-    
-    if(res.data && res.data.length > 0 && this.totalDebitMonth === 0){
-      console.log('volviendo a cargar desde cero');
-      this.totalCreditMonth = res.data.at(-1)!.totalCredit ;
-      this.totalDebitMonth = res.data.at(-1)!.totalDebit ;
-    }
 
-  }
   
   
 }

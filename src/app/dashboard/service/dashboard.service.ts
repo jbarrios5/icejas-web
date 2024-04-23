@@ -23,7 +23,9 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 export class DashboardService {
 
   public transactionReportGetResData!:TransactionReportGetResData
-
+  public totalDebitMonth:number       = 0;
+  public totalCrediMonth:number       = 0;
+  public churchCurrentBalance: number = 0;
 
   constructor(private httpClient:HttpClient,private authService:AuthService) { }
 
@@ -36,7 +38,10 @@ export class DashboardService {
         
       }
     )
-    return this.httpClient.get<Church>(`${environments.icejasBaseUrl}/church?church_id=1`,{headers:headers});
+    return this.httpClient.get<Church>(`${environments.icejasBaseUrl}/church?church_id=1`,{headers:headers})
+    .pipe(
+      tap( res => this.churchCurrentBalance = res.currentBalance)
+    );
   }
   
   getReport():Observable<TransactionReportGetResData>{
@@ -51,8 +56,11 @@ export class DashboardService {
     return this.httpClient.get<TransactionReportGetResData>(`${environments.icejasBaseUrl}/report?churchId=1`,{headers:headers})
     .pipe(
       tap( res =>{
-        if(res.data)
+        if(res.data){
             this.transactionReportGetResData = res;
+            this.totalCrediMonth = res.data.at(-1)!.totalCredit;
+            this.totalDebitMonth = res.data.at(-1)!.totalDebit;
+          }
       })
     );
   }

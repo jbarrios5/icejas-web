@@ -1,0 +1,16 @@
+
+<div class="row bg-white shadow p-3 mb-5">
+  <div class="col-lg-4 col-md-12 col-sm-12 bg-primary mt-2 text-white rounded ">
+    <h2>Saldo actual</h2>
+    <p class="text-center size"> <strong>{{currentBalance | currency:'Gs':'symbol':'1.0-0' }}</strong></p>
+    
+        
+  </div>
+  <div class="col-lg-4 col-md-12 col-sm-12 bg-success mt-2 text-white rounded ">
+        <h2 class="">Ingreso mes actual</h2>
+        <p class="text-center size"><strong>{{totalCreditMonth | currency:'Gs':'symbol':'1.0-0' }}</strong> </p>
+  </div>
+  <div class="col-lg-4 col-md-12 col-sm-12 bg-secondary text-white mt-2  rounded ">
+    <h2 class="">Gasto mes actual</h2>
+    <p class="text-center size"><strong>{{totalDebitMonth | currency:'Gs':'symbol':'1.0-0' }}</strong> </p>
+</div>

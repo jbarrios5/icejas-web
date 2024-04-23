@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { DashboardService } from "src/app/dashboard/service/dashboard.service";
+import { Church } from "src/app/transactions/interface/church.interface";
 
 @Component({
     selector: 'layout-home-page',
@@ -6,15 +8,27 @@ import { Component, OnInit } from "@angular/core";
     styleUrls:['./layout.component.css']
   })
 export class LayoutHomeComponent implements OnInit{
-    
-    constructor() {
+    church:Church ={
+        currentBalance :0,
+        created:'',
+        id:0,
+        name:''
+    };
+    constructor(private dashboardService:DashboardService) {
     }
     ngOnInit(): void {
-        throw new Error("Method not implemented.");
+        this.getChurch()
     }
 
 
-    
+    getChurch():void{
+        this.dashboardService.getChurch().subscribe(
+          (res:Church) => {
+            this.church= res
+            localStorage.setItem("church",JSON.stringify(this.church))
+          }
+        )
+      }
   
     
 
