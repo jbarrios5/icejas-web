@@ -3,6 +3,7 @@ import { User } from 'src/app/auth/models/AuthLogin';
 import { DashboardService } from '../service/dashboard.service';
 import { Church } from 'src/app/transactions/interface/church.interface';
 import { TransactionReportGetResData } from 'src/app/transactions/interface/transaction.interface';
+import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 
 @Component({
   selector: 'app-home',
@@ -17,17 +18,38 @@ export class HomeComponent implements OnInit{
     name:'',
     role:''
   };
+
+  church:Church ={
+    currentBalance :0,
+    created:'',
+    id:0,
+    name:''
+};
   
   
   
   public finishedGetReport:boolean = false;
+  public isFinishedGetChurch:boolean = false;
   constructor(private dashboardService:DashboardService){
    
 
   }
   ngOnInit(): void {
     this.getUser();
-    this.getReport();
+    forkJoin({
+      church: this.dashboardService.getChurch(),
+      report: this.dashboardService.getReport(),
+    }).subscribe(({ church, report }) => {
+      if (church) {
+        this.church = church;
+        localStorage.setItem("church",JSON.stringify(this.church))
+        this.isFinishedGetChurch = true;
+      }
+      if (report) 
+        this.finishedGetReport = true;
+      
+    });
+    
   }
   getUser():void{
     const user = localStorage.getItem('user') || '';
@@ -36,19 +58,8 @@ export class HomeComponent implements OnInit{
   }
 
 
-  getReport():void{
-    this.dashboardService.getReport().subscribe
-    (
-      (res)=>{
-        if(!res)
-          this.finishedGetReport =false
-        else{
-          this.finishedGetReport = true;  
-        }
-      }
-      
-    )
-  }
+  
+  
 
 
   
