@@ -31,7 +31,12 @@
                 
             <button mat-button color="warn" class=" mx-1 col-lg-2 col-md-12 col-sm-12  text-center " mat-flat-button (click)="this.cleanData()" >
               <mat-icon>cleaning_services </mat-icon> Limpiar </button>
-          </form>
+        </form>
+          
+          <div *ngIf="this.isUserAdmin">
+            <button mat-button color="primary" class=" mt-1 mx-1 col-lg-2 col-md-12 col-sm-12  text-center " mat-stroked-button  (click)="this.viewPdf()" >
+              <mat-icon>picture_as_pdf </mat-icon> Descargar PDF</button>
+          </div>
           <div *ngIf="this.ELEMENT_DATA.length === 0;else data"><h2 class="text-center">No se encontraron datos en la tabla!!!</h2> </div>
         
           <ng-template #data>

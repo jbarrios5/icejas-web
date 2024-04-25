@@ -34,7 +34,7 @@ export class ListTransactionComponent implements OnInit{
   public debit:string = "D";
   public credit:string = "C";
   public ELEMENT_DATA: TransactionElement[] = [];
-  displayedColumns: string[] = ['fecha', 'Nro', 'actividad', 'observacion', 'ingreso', 'egreso'];
+  displayedColumns: string[] = ['fecha', 'actividad', 'observacion', 'ingreso', 'egreso'];
   dataSource =new MatTableDataSource<TransactionElement>(this.ELEMENT_DATA)
   types: TransactionType[] = [];
   church!:Church;

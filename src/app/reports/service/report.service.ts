@@ -25,6 +25,14 @@ export class ReportService {
         
 
     }
+    getPdf(startMonth:string,endMonth:string, churchId: number): Observable<ArrayBuffer> {
+      
+        const  headers =new HttpHeaders({
+            'apiKey': API_KEY,
+            'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+          })
+      return this.httpClient.post<ArrayBuffer>(`${environments.icejasBaseUrl}/pdf?startDate=${startMonth}&endDate=${endMonth}&churchId=${churchId}`, null, {headers:headers,responseType:'blob' as 'json'});
+    }
     
 
 

@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { MatTableDataSource } from "@angular/material/table";
 import { Router } from "@angular/router";
+import { User } from "src/app/auth/models/AuthLogin";
 import Swal from "sweetalert2";
-import {MONTHS} from "../../../constants/icejas-constants"
+import {ADMIN_ROLE, MONTHS} from "../../../constants/icejas-constants"
 import { ReportService } from "../../service/report.service";
 import {  buildEndMonth, buildStartMonth } from "./balance-util";
 export interface TransactionReportElement {
@@ -30,11 +31,14 @@ export class BalanceReporComponent implements OnInit{
   public ELEMENT_DATA: TransactionReportElement[] = [];
   public displayedColumns: string[] = ['mes', 'ingreso', 'egreso', 'saldo'];
   public dataSource =new MatTableDataSource<TransactionReportElement>(this.ELEMENT_DATA)
- 
+  public isUserAdmin = false;
   constructor(private reportService:ReportService,private router:Router){}
 
   ngOnInit(): void {
     this.getTransactionSummary()
+    const user:User =  JSON.parse(localStorage.getItem("user")!);
+    if( user.role === ADMIN_ROLE)
+      this.isUserAdmin = true;
   }
 
 
@@ -75,4 +79,16 @@ export class BalanceReporComponent implements OnInit{
     this.reportTransactionFormControl.controls['startMonth'].setValue(null)
     this.getTransactionSummary()
   }
+
+  viewPdf(): void {
+    let {startMonth,endMonth} = this.reportTransactionFormControl.value;
+    startMonth = buildStartMonth(startMonth ||'');
+    endMonth   = buildEndMonth(endMonth || ''); 
+    this.reportService.getPdf(startMonth, endMonth, 1).subscribe((data: ArrayBuffer) => {
+      const file = new Blob([data], { type: 'application/pdf' });
+      const fileUrl = URL.createObjectURL(file);
+      window.open(fileUrl);
+    });
+  }
+
 }

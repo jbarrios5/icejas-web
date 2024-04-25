@@ -38,6 +38,7 @@ export class DashboardService {
         
       }
     )
+    
     return this.httpClient.get<Church>(`${environments.icejasBaseUrl}/church?church_id=1`,{headers:headers})
     .pipe(
       tap( res => this.churchCurrentBalance = res.currentBalance)
